@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import CoverPhoto from './CoverPhoto';
 import Chart from './Chart';
+import GiftForm from './GiftForm';
 
 const App = () => {
   const mainHeaderStyle = {
@@ -16,6 +17,7 @@ const App = () => {
       </div>
       <CoverPhoto />
       <Chart />
+      <GiftForm />
     </div>
   );
 };
