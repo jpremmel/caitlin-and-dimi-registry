@@ -9,17 +9,21 @@
     "lint-fix": "eslint src/**/** --fix & exit 0",
     "build": "webpack"
   },
-  "eslintIgnore": ["CoverPhoto.jpg"],
+  "eslintIgnore": [
+    "CoverPhoto.jpg"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^2.9.3",
     "css-loader": "^3.5.2",
     "firebase": "^7.14.0",
     "isomorphic-fetch": "^2.2.1",
     "materialize-css": "1.0.0-rc.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-redux-firebase": "^3.3.0",

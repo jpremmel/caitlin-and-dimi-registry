@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import CoverPhoto from './CoverPhoto';
+import Chart from './Chart';
 
 const App = () => {
   const mainHeaderStyle = {
@@ -14,6 +15,7 @@ const App = () => {
         <h1 style={mainHeaderStyle}>Caitlin & Dimitar</h1>
       </div>
       <CoverPhoto />
+      <Chart />
     </div>
   );
 };
