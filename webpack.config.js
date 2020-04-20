@@ -46,11 +46,13 @@ module.exports = {
             options: {
                 presets: [
                     ['@babel/preset-env', {'modules': false}],
-                    '@babel/preset-react',
+                    '@babel/preset-react'
                 ],
                 plugins: [
                   'react-hot-loader/babel',
-                  'styled-jsx/babel'
+                  'styled-jsx/babel',
+                  '@babel/plugin-transform-modules-commonjs',
+                  '@babel/plugin-proposal-class-properties'
                 ]
             }
           },
