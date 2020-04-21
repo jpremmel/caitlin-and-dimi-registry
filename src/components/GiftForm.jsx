@@ -6,42 +6,48 @@ const GiftForm = () => {
   const headerStyle = {
     textAlign: 'center'
   };
-  const textareaWidth = {
-    width: '80%'
+  const textInputStyle = {
+    width: '35%',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  };
+  const wideInputStyle = {
+    width: '60%',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   };
   const btnStyle = {
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: '30px'
+    marginBottom: '40px'
   };
 
   return (
     <div className='container'>
-      <style jsx>{`
-        input[type=text] {
-          width: 50%;
-        }
-      `}</style>
       <h3 style={headerStyle}>Add a Gift to the Registry</h3>
       <form>
-        <div className='input-field'>
-          <input type='text' placeholder='Your Name' />
+        <div className='section'>
+          <FundCheckbox fundName='Honeymoon' />
+          <FundCheckbox fundName='Student Loan Debt' />
+          <FundCheckbox fundName='Our First Home' />
+          <FundCheckbox fundName='Therapy for Our Future Kids' />
         </div>
-        <FundCheckbox fundName='Honeymoon' />
-        <FundCheckbox fundName='Student Loan Debt' />
-        <FundCheckbox fundName='Our First Home' />
-        <FundCheckbox fundName='Therapy for Our Future Kids' />
-        <div className='input-field'>
-          <textarea
-            style={textareaWidth}
-            className='materialize-textarea'
-            placeholder='Include a note to the happy couple'
-          />
-        </div>
-        <div className='input-field'>
+          <div className='input-field'>
+            <input type='text' placeholder='Your Name' style={textInputStyle} />
+          </div>
+          <div className='input-field'>
+            <textarea
+              style={wideInputStyle}
+              className='materialize-textarea'
+              placeholder='Include a note to the happy couple'
+            />
+          </div>
+        <div className='input-field section'>
           <p>
-            <label>
+            <label style={wideInputStyle}>
               <input type='checkbox' className='filled-in' />
               <span className='checkboxLabel'>
                 Publicly display my note, name, and which fund(s) I chose (the amount contributed will not be displayed)
@@ -49,9 +55,7 @@ const GiftForm = () => {
             </label>
           </p>
         </div>
-        <button style={btnStyle} className='waves-effect waves-light btn-small'>
-          Add My Gift
-        </button>
+        <button style={btnStyle} className='btn waves-effect waves-light'><i className="material-icons left">card_giftcard</i>Add My Gift</button>
       </form>
     </div>
   );
