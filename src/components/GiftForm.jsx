@@ -19,11 +19,21 @@ const GiftForm = () => {
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: '40px'
+    backgroundColor: '#803370'
   };
 
   return (
     <div className='container'>
+      <style jsx>{`
+        .input-field input[type=text]:focus, .input-field textarea:focus {
+          border-bottom: 1px solid #803370;
+          box-shadow: 0 1px 0 0 #803370;
+        }
+        [type=checkbox].filled-in:checked+span:not(.lever):after {
+          border: 2px solid #803370;
+          background-color: #803370;
+        }
+      `}</style>
       <form>
         <div className='section'>
           <FundCheckbox fundName='Honeymoon' />
