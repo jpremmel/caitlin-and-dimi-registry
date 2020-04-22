@@ -3,9 +3,6 @@ import FundCheckbox from './FundCheckbox';
 
 const GiftForm = () => {
 
-  const headerStyle = {
-    textAlign: 'center'
-  };
   const textInputStyle = {
     width: '35%',
     display: 'block',
@@ -27,7 +24,6 @@ const GiftForm = () => {
 
   return (
     <div className='container'>
-      <h3 style={headerStyle}>Add a Gift to the Registry</h3>
       <form>
         <div className='section'>
           <FundCheckbox fundName='Honeymoon' />

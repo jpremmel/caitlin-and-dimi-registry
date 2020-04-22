@@ -18,16 +18,7 @@ const Chart = () => {
 
   return (
     <div className='container'>
-      <Doughnut
-        data={chartData}
-        options={{
-          title: {
-            display: true,
-            text: 'Caitlin & Dimitar\'s Wedding Registry Funds',
-            fontSize: 20
-          }
-        }}
-      />
+      <Doughnut data={chartData} />
     </div>
   );
 };
