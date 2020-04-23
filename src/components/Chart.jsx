@@ -7,8 +7,8 @@ const Chart = () => {
     labels: ['Honeymoon', 'Student Loan Debt', 'Our First Home', 'Therapy for Our Future Kids'],
     datasets: [
       {
-        backgroundColor: ["#ffd480", "#e6d7f4","#a6e8e6","#803370"],
-        borderColor: ["#ffd480", "#ded7f4","#a6e8e6","#803370"],
+        backgroundColor: ['#ffd480', '#e6d7f4','#a6e8e6','#803370'],
+        borderColor: ['#ffd480', '#ded7f4','#a6e8e6','#803370'],
         borderWidth: 2,
         data: [20, 40, 70, 50]
       }
