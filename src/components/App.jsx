@@ -5,6 +5,7 @@ import CoverPhoto from './CoverPhoto';
 import Navbar from './Navbar';
 import PageHeader from './PageHeader';
 import Chart from './Chart';
+import NoteCardList from './NoteCardList';
 import GiftForm from './GiftForm';
 
 const App = () => {
@@ -20,6 +21,14 @@ const App = () => {
             <div>
               <PageHeader headerText="Caitlin & Dimitar's Wedding Registry Funds" />
               <Chart />
+            </div>
+          } />
+        <Route  
+          path='/notes' 
+          render={() => 
+            <div>
+              <PageHeader headerText='Notes from Guests' />
+              <NoteCardList />
             </div>
           } />
         <Route  
