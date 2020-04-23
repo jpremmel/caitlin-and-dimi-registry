@@ -10,7 +10,8 @@
     "build": "webpack"
   },
   "eslintIgnore": [
-    "CoverPhoto.jpg"
+    "CoverPhoto.jpg",
+    "JoyLogo.png"
   ],
   "keywords": [],
   "author": "",

@@ -35,22 +35,20 @@ const GiftForm = () => {
         }
       `}</style>
       <form>
-        <div className='section'>
-          <FundCheckbox fundName='Honeymoon' />
-          <FundCheckbox fundName='Student Loan Debt' />
-          <FundCheckbox fundName='Our First Home' />
-          <FundCheckbox fundName='Therapy for Our Future Kids' />
+        <FundCheckbox fundName='Honeymoon' />
+        <FundCheckbox fundName='Student Loan Debt' />
+        <FundCheckbox fundName='Our First Home' />
+        <FundCheckbox fundName='Therapy for Our Future Kids' />
+        <div className='input-field'>
+          <input type='text' placeholder='Your Name' style={textInputStyle} />
         </div>
-          <div className='input-field'>
-            <input type='text' placeholder='Your Name' style={textInputStyle} />
-          </div>
-          <div className='input-field'>
-            <textarea
-              style={wideInputStyle}
-              className='materialize-textarea'
-              placeholder='Include a note to the happy couple'
-            />
-          </div>
+        <div className='input-field'>
+          <textarea
+            style={wideInputStyle}
+            className='materialize-textarea'
+            placeholder='Include a note to the happy couple'
+          />
+        </div>
         <div className='input-field section'>
           <p>
             <label style={wideInputStyle}>
