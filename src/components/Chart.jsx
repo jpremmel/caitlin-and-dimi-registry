@@ -7,7 +7,6 @@ const Chart = () => {
     labels: ['Honeymoon', 'Student Loan Debt', 'Our First Home', 'Therapy for Our Future Kids'],
     datasets: [
       {
-        label: 'Percentage of total gift funds',
         backgroundColor: ["#ffd480", "#e6d7f4","#a6e8e6","#803370"],
         borderColor: ["#ffd480", "#ded7f4","#a6e8e6","#803370"],
         borderWidth: 2,
@@ -18,7 +17,17 @@ const Chart = () => {
 
   return (
     <div className='container'>
-      <Doughnut data={chartData} />
+      <Doughnut 
+        data={chartData}
+        options={{
+          legend: {
+            labels: {
+              fontSize: 17,
+              fontColor: 'black'
+            }
+          }
+        }}
+      />
     </div>
   );
 };

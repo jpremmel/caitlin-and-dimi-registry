@@ -10,20 +10,22 @@ const Photo = () => {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
   };
-  const position = {
-    marginBottom: '-170px'
-    // display: 'inline-block'
+  const mainTextBlock = {
+    display: 'inline-block',
+    textAlign: 'center'
   };
-  const marcellusFont = {
-    fontFamily: 'Marcellus, serif'
+  const mainHeaderStyle = {
+    fontFamily: 'Marcellus, serif',
+    fontSize: '5.6rem',
+    marginTop: '3.8rem'
   };
   return (
-    <div>
-      <div className='container' style={position}>
-          <h1 style={marcellusFont}>Caitlin & Dimitar</h1>
-          <h6>February 28, 2021</h6>
-      </div>
-      <div style={coverPhotoStyle}>
+    <div style={coverPhotoStyle}>
+      <div className='container'>
+        <div style={mainTextBlock}>
+          <h1 style={mainHeaderStyle}>Caitlin & Dimitar</h1>
+          <h6><strong>February 28, 2021   •   Washington, DC</strong></h6>
+        </div>
       </div>
     </div>
   );
