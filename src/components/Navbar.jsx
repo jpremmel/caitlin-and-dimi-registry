@@ -15,9 +15,9 @@ const Navbar = () => {
     <nav className='nav-extended' style={navStyle}>
     <div className='nav-content'>
       <ul className='tabs tabs-transparent' style={centerTabs}>
-        <li className='tab'><Link to='/'>Home</Link></li>
-        <li className='tab'><Link to='/notes'>Guest Notes</Link></li>
+        <li className='tab'><Link to='/'>Our Registry</Link></li>
         <li className='tab'><Link to='/gift-form'>Add My Gift</Link></li>
+        <li className='tab'><Link to='/notes'>Guest Notes</Link></li>
       </ul>
     </div>
   </nav>

@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import FundCheckbox from './FundCheckbox';
+import { submitGiftForm } from '../actions';
+import { useFirestore } from 'react-redux-firebase';
+import { connect, useDispatch } from 'react-redux';
+import { compose } from 'redux';
 
 const GiftForm = () => {
+  const firestore = useFirestore();
+  const dispatch = useDispatch();
+
+  const handleSubmit = useCallback(
+    gift => dispatch(submitGiftForm({ firestore }, gift)),
+    [firestore]
+  );
 
   const textInputStyle = {
     width: '35%',
@@ -34,7 +45,10 @@ const GiftForm = () => {
           background-color: #803370;
         }
       `}</style>
-      <form>
+      <form onSubmit={e => {
+        e.preventDefault();
+        handleSubmit();
+      }}>
         <FundCheckbox fundName='Honeymoon' />
         <FundCheckbox fundName='Student Loan Debt' />
         <FundCheckbox fundName='Our First Home' />
@@ -59,7 +73,14 @@ const GiftForm = () => {
             </label>
           </p>
         </div>
-        <button style={btnStyle} className='btn waves-effect waves-light'><i className="material-icons left">card_giftcard</i>Add My Gift</button>
+        <button 
+          style={btnStyle} 
+          className='btn waves-effect waves-light'>
+            <i className="material-icons left">
+              card_giftcard
+            </i>
+          Add My Gift
+        </button>
       </form>
     </div>
   );

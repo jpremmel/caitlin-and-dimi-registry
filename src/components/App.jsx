@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
-import CoverPhoto from './CoverPhoto';
+import M from 'materialize-css';
+import CoverPhoto from '../images/CoverPhoto.jpg';
+import PhotoOverlay from './PhotoOverlay';
 import Navbar from './Navbar';
 import PageHeader from './PageHeader';
 import Chart from './Chart';
@@ -10,10 +12,34 @@ import GiftForm from './GiftForm';
 import Footer from './Footer';
 
 const App = () => {
+
+  useEffect(() => {
+    var parallax = document.querySelectorAll('.parallax');
+    M.Parallax.init(parallax, {});
+  }, []);
+
+  const parallaxHeight = `
+    .parallax-container {
+      height: 700px;
+    }
+  `;
+
+  const coverPhotoStyle = {
+    // backgroundSize: 'cover',
+    // height: '700px'
+  };
+
   return (
     <div>
+      <style>{parallaxHeight}</style>
+      <div className='parallax-container'>
+        <div className='parallax' >
+          <img src={CoverPhoto} style={coverPhotoStyle} />
+        </div>
+        <PhotoOverlay />
+      </div>
+      
       <div style={{ marginBottom: '40px'}}>
-        <CoverPhoto />
         <Navbar />
         <Switch>
           <Route 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import 'chartjs-plugin-labels';
 
 const Chart = () => {
 
@@ -10,7 +11,7 @@ const Chart = () => {
         backgroundColor: ['#ffd480', '#e6d7f4','#a6e8e6','#803370'],
         borderColor: ['#ffd480', '#ded7f4','#a6e8e6','#803370'],
         borderWidth: 2,
-        data: [20, 40, 70, 50]
+        data: [2, 2, 1, 5]
       }
     ]
   };
@@ -20,6 +21,15 @@ const Chart = () => {
       <Doughnut 
         data={chartData}
         options={{
+          tooltips: {
+            // enabled: false
+          },
+          plugins: {
+            labels: {
+              render: 'percentage',
+              fontColor: 'black'
+            }
+          },
           legend: {
             labels: {
               fontSize: 17,
