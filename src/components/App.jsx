@@ -25,8 +25,7 @@ const App = () => {
   `;
 
   const coverPhotoStyle = {
-    // backgroundSize: 'cover',
-    // height: '700px'
+    // width: '100%'
   };
 
   return (

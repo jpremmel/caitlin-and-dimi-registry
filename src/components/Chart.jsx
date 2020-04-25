@@ -22,12 +22,21 @@ const Chart = () => {
         data={chartData}
         options={{
           tooltips: {
-            // enabled: false
+            bodyFontSize: 17,
+            callbacks: {
+              label: (tooltipItem, data) => {
+                const label = data.labels[tooltipItem['index']];
+                const dataset = data['datasets'][0];
+                const percent = Math.round((dataset['data'][tooltipItem['index']] / dataset['_meta'][0]['total']) * 100)
+                return `${label}: ${percent}%`;
+              }
+            }
           },
           plugins: {
             labels: {
-              render: 'percentage',
-              fontColor: 'black'
+              fontColor: 'black',
+              fontSize: 14,
+              fontStyle: 'bold'
             }
           },
           legend: {
