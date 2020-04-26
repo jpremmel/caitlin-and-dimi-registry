@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css';
 import CoverPhoto from '../images/CoverPhoto.jpg';
@@ -9,7 +8,6 @@ import PageHeader from './PageHeader';
 import Chart from './Chart';
 import NoteCardList from './NoteCardList';
 import GiftForm from './GiftForm';
-// import Footer from './Footer';
 
 const App = () => {
 
@@ -42,38 +40,21 @@ const App = () => {
         </div>
         <PhotoOverlay />
       </div>
-      
       <div style={{ marginBottom: '40px'}}>
         <Navbar />
-        <Switch>
-          <Route 
-            exact 
-            path='/' 
-            render={() => 
-              <div>
-                <PageHeader headerText="Caitlin & Dimitar's Wedding Registry Funds" />
-                <Chart />
-              </div>
-            } />
-          <Route  
-            path='/notes' 
-            render={() => 
-              <div>
-                <PageHeader headerText='Notes from Loved Ones' />
-                <NoteCardList />
-              </div>
-            } />
-          <Route  
-            path='/gift-form' 
-            render={() => 
-              <div>
-                <PageHeader headerText='Add A Gift' />
-                <GiftForm />
-              </div>
-            } />
-        </Switch>
+        <div id='registry'>
+          <PageHeader headerText="Caitlin & Dimitar's Wedding Registry Funds" />
+          <Chart />
+        </div>
+        <div id='form'>
+          <PageHeader headerText='Add A Gift' />
+          <GiftForm />
+        </div>
+        <div id='notes'>
+          <PageHeader headerText='Notes from Loved Ones' />
+          <NoteCardList />
+        </div>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };

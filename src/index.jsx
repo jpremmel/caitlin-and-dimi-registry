@@ -4,7 +4,6 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
-import { HashRouter } from 'react-router-dom';
 //import { AppContainer } from 'react-hot-loader';
 import { firebaseConfig } from './constants/firebaseConfig';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -41,9 +40,7 @@ const rrfProps = {
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <HashRouter>
-        <App />
-      </HashRouter>
+      <App />
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('react-app-root')
