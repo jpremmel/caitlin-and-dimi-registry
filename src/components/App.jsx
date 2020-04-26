@@ -9,13 +9,18 @@ import PageHeader from './PageHeader';
 import Chart from './Chart';
 import NoteCardList from './NoteCardList';
 import GiftForm from './GiftForm';
-import Footer from './Footer';
+// import Footer from './Footer';
 
 const App = () => {
 
   useEffect(() => {
+    // Initialize materialize parallax animation when App mounts
     var parallax = document.querySelectorAll('.parallax');
     M.Parallax.init(parallax, {});
+
+    // Initialize materialize tabs animation when App mounts
+    var tabs = document.querySelectorAll('.tabs');
+    M.Tabs.init(tabs);
   }, []);
 
   const parallaxHeight = `
@@ -68,7 +73,7 @@ const App = () => {
             } />
         </Switch>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
