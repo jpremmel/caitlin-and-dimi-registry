@@ -7,7 +7,7 @@ const NoteCardList = (props) => {
 
   useFirestoreConnect('gifts');
   const giftList = useSelector(state => state.firestore.data['gifts']);
-  console.log(giftList);
+  //console.log(giftList);
 
   const lavendarBackground = {
     backgroundColor: '#e6d7f4'
@@ -48,12 +48,9 @@ const NoteCardList = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-  gifts: state.gifts
-  };
-};
+const mapStateToProps = (state) => ({
+    gifts: state.gifts
+});
 
 export default compose(
   connect(mapStateToProps)
