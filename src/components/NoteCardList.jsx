@@ -1,6 +1,14 @@
 import React from 'react';
+import { connect, useSelector } from 'react-redux';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
-const NoteCardList = () => {
+const NoteCardList = (props) => {
+
+  useFirestoreConnect('gifts');
+  const giftList = useSelector(state => state.firestore.data['gifts']);
+  console.log(giftList);
+
   const lavendarBackground = {
     backgroundColor: '#e6d7f4'
   };
@@ -40,4 +48,13 @@ const NoteCardList = () => {
   );
 };
 
-export default NoteCardList;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+  gifts: state.gifts
+  };
+};
+
+export default compose(
+  connect(mapStateToProps)
+)(NoteCardList);

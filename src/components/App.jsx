@@ -43,11 +43,11 @@ const App = () => {
       <div style={{ marginBottom: '40px'}}>
         <Navbar />
         <div id='registry'>
-          <PageHeader headerText="Caitlin & Dimitar's Wedding Registry Funds" />
+          <PageHeader headerText="Wedding Registry Funds: Current Status" />
           <Chart />
         </div>
         <div id='form'>
-          <PageHeader headerText='Add A Gift' />
+          <PageHeader headerText='Add a Gift' />
           <GiftForm />
         </div>
         <div id='notes'>

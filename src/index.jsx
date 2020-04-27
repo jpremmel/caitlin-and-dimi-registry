@@ -20,7 +20,6 @@ const rrfConfig = {
 
 firebase.initializeApp(firebaseConfig);
 //firebase.analytics();
-firebase.firestore();
 
 const store = createStore(
   rootReducer,
