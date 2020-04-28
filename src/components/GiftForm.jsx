@@ -12,16 +12,67 @@ const GiftForm = () => {
   //   [firestore]
   // );
 
-  
-  
+  const [giftSubmission, setGiftSubmission] = useState({
+    'honeymoon-checkbox': false,
+    'honeymoon-amount': '',
 
+    'loan-checkbox': false,
+    'loan-amount': '',
 
-  let amountDisplay = {};
-  //  if (!checked) {
-  //   amountDisplay = {
-  //     display: 'none'
-  //   };
-  //  }
+    'home-checkbox': false,
+    'home-amount': '',
+
+    'therapy-checkbox': false,
+    'therapy-amount': '',
+
+    'name': '',
+    'note': '',
+    'public-checkbox': false
+  });
+  console.log(giftSubmission);
+
+  let honeymoonAmountDisplay = {};
+  if (!giftSubmission['honeymoon-checkbox']) {
+    honeymoonAmountDisplay = {
+      display: 'none'
+    };
+
+  }
+
+  let loanAmountDisplay = {};
+  if (!giftSubmission['loan-checkbox']) {
+    loanAmountDisplay = {
+      display: 'none'
+    };
+  }
+
+  let homeAmountDisplay = {};
+  if (!giftSubmission['home-checkbox']) {
+    homeAmountDisplay = {
+      display: 'none'
+    };
+  }
+
+  let therapyAmountDisplay = {};
+  if (!giftSubmission['therapy-checkbox']) {
+    therapyAmountDisplay = {
+      display: 'none'
+    };
+  }
+  
+  const handleCheck = e => {
+    setGiftSubmission({
+      ...giftSubmission,
+      [e.target.id]: e.target.checked
+    });
+  };
+
+  const handleTextChange = e => {
+    setGiftSubmission({
+      ...giftSubmission,
+      [e.target.id]: e.target.value
+    });
+  };
 
   const checkboxMargin = {
     marginRight: '15px',
@@ -74,16 +125,22 @@ const GiftForm = () => {
               <input
                 type='checkbox'
                 className='filled-in'
+                id='honeymoon-checkbox'
+                onChange={handleCheck}
+                checked={giftSubmission['honeymoon-checkbox']}
               />
               <span style={checkboxMargin}>Honeymoon</span>
             </label>
           </div>
           <div className='col s4 l3'>
-            <span style={amountDisplay}>$  
+            <span style={honeymoonAmountDisplay}>$  
               <input
                 type='number'
                 placeholder=' Amount' 
                 style={{width: '90%'}}
+                id='honeymoon-amount'
+                onChange={handleTextChange}
+                value={giftSubmission['honeymoon-amount']}
               />
             </span>
           </div>
@@ -96,16 +153,22 @@ const GiftForm = () => {
               <input
                 type='checkbox'
                 className='filled-in'
+                id='loan-checkbox'
+                onChange={handleCheck}
+                checked={giftSubmission['loan-checkbox']}
               />
               <span style={checkboxMargin}>Student Loan Debt</span>
             </label>
           </div>
           <div className='col s4 l3'>
-            <span style={amountDisplay}>$  
+            <span style={loanAmountDisplay}>$  
               <input
                 type='number'
                 placeholder=' Amount' 
                 style={{width: '90%'}}
+                id='loan-amount'
+                onChange={handleTextChange}
+                value={giftSubmission['loan-amount']}
               />
             </span>
           </div>
@@ -118,16 +181,22 @@ const GiftForm = () => {
               <input
                 type='checkbox'
                 className='filled-in'
+                id='home-checkbox'
+                onChange={handleCheck}
+                checked={giftSubmission['home-checkbox']}
               />
               <span style={checkboxMargin}>Our First Home</span>
             </label>
           </div>
           <div className='col s4 l3'>
-            <span style={amountDisplay}>$  
+            <span style={homeAmountDisplay}>$  
               <input
                 type='number'
                 placeholder=' Amount' 
                 style={{width: '90%'}}
+                id='home-amount'
+                onChange={handleTextChange}
+                value={giftSubmission['home-amount']}
               />
             </span>
           </div>
@@ -140,16 +209,22 @@ const GiftForm = () => {
               <input
                 type='checkbox'
                 className='filled-in'
+                id='therapy-checkbox'
+                onChange={handleCheck}
+                checked={giftSubmission['therapy-checkbox']}
               />
               <span style={checkboxMargin}>Therapy for Our Future Kids</span>
             </label>
           </div>
           <div className='col s4 l3'>
-            <span style={amountDisplay}>$  
+            <span style={therapyAmountDisplay}>$  
               <input
                 type='number'
                 placeholder=' Amount' 
                 style={{width: '90%'}}
+                id='therapy-amount'
+                onChange={handleTextChange}
+                value={giftSubmission['therapy-amount']}
               />
             </span>
           </div>
@@ -162,6 +237,8 @@ const GiftForm = () => {
             type='text' 
             style={textInputStyle}
             placeholder='Your Name' 
+            onChange={handleTextChange}
+            value={giftSubmission['name']}
           />
         </div>
 
@@ -172,6 +249,8 @@ const GiftForm = () => {
             style={wideInputStyle}
             className='materialize-textarea'
             placeholder='Include a note to the happy couple'
+            onChange={handleTextChange}
+            value={giftSubmission['note']}
           />
         </div>
 
@@ -179,10 +258,12 @@ const GiftForm = () => {
         <div className='input-field section'>
           <p>
             <label style={wideInputStyle}>
-              <input 
-                id='public' 
+              <input  
                 type='checkbox' 
                 className='filled-in' 
+                id='public-checkbox'
+                onChange={handleCheck}
+                checked={giftSubmission['public-checkbox']}
               />
               <span className='checkboxLabel'>
                 Publicly display my note, name, and which fund(s) I chose (the amount contributed will not be displayed)
