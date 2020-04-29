@@ -5,12 +5,12 @@ import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 
 const GiftForm = () => {
-  // const firestore = useFirestore();
-  // const dispatch = useDispatch();
-  // const handleSubmit = useCallback(
-  //   gift => dispatch(submitGiftForm({ firestore }, gift)),
-  //   [firestore]
-  // );
+  const firestore = useFirestore();
+  const dispatch = useDispatch();
+  const handleSubmit = useCallback(
+    gift => dispatch(submitGiftForm({ firestore }, gift)),
+    [firestore]
+  );
 
   const hideAmount = {
     display: 'none'
@@ -146,7 +146,7 @@ const GiftForm = () => {
       `}</style>
       <form onSubmit={e => {
         e.preventDefault();
-        //handleSubmit(); // TO DO: now that hook is working, just need to submit gift when dispatching the action
+        handleSubmit(gift);
       }}>
 
         {/* FUNDS */}
