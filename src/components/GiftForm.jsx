@@ -8,7 +8,9 @@ const GiftForm = () => {
   const firestore = useFirestore();
   const dispatch = useDispatch();
   const handleSubmit = useCallback(
-    gift => dispatch(submitGiftForm({ firestore }, gift)),
+    gift => {
+      dispatch(submitGiftForm({ firestore }, gift));
+    },
     [firestore]
   );
 
@@ -47,7 +49,7 @@ const GiftForm = () => {
       }
     }
   });
-  console.log(gift);
+  //console.log(gift);
 
   const handleCheck = e => {
     setGift({
