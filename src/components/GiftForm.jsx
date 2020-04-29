@@ -12,57 +12,36 @@ const GiftForm = () => {
   //   [firestore]
   // );
 
+  const hideAmount = {
+    display: 'none'
+  };
+
   const [giftSubmission, setGiftSubmission] = useState({
     'honeymoon': {
       'checkbox': false,
-      'amount': ''
+      'amount': '',
+      'style': hideAmount
     },
     'loan': {
       'checkbox': false,
-      'amount': ''
+      'amount': '',
+      'style': hideAmount
     },
     'home': {
       'checkbox': false,
-      'amount': ''
+      'amount': '',
+      'style': hideAmount
     },
     'therapy': {
       'checkbox': false,
-      'amount': ''
+      'amount': '',
+      'style': hideAmount
     },
-
     'name': '',
     'note': '',
     'public': false
   });
   console.log(giftSubmission);
-
-  let honeymoonAmountDisplay = {};
-  if (!giftSubmission.honeymoon.checkbox) {
-    honeymoonAmountDisplay = {
-      display: 'none'
-    };
-  }
-
-  let loanAmountDisplay = {};
-  if (!giftSubmission.loan.checkbox) {
-    loanAmountDisplay = {
-      display: 'none'
-    };
-  }
-
-  let homeAmountDisplay = {};
-  if (!giftSubmission.home.checkbox) {
-    homeAmountDisplay = {
-      display: 'none'
-    };
-  }
-
-  let therapyAmountDisplay = {};
-  if (!giftSubmission.therapy.checkbox) {
-    therapyAmountDisplay = {
-      display: 'none'
-    };
-  }
   
   const handleFundCheck = e => {
     e.target.checked ? (
@@ -70,7 +49,8 @@ const GiftForm = () => {
         ...giftSubmission,
         [e.target.name]: {
           'checkbox': e.target.checked,
-          'amount': giftSubmission[e.target.name].amount
+          'amount': giftSubmission[e.target.name].amount,
+          'style': {}
         }
       })
     ) : (
@@ -78,11 +58,11 @@ const GiftForm = () => {
         ...giftSubmission,
         [e.target.name]: {
           'checkbox': e.target.checked,
-          'amount': ''
+          'amount': '',
+          'style': hideAmount
         }
       })
     );
-    
   };
 
   const handleFundAmountChange = e => {
@@ -150,7 +130,7 @@ const GiftForm = () => {
       `}</style>
       <form onSubmit={e => {
         e.preventDefault();
-        //handleSubmit();
+        //handleSubmit(); // TO DO: now that hook is working, just need to submit giftSubmission when dispatching the action
       }}>
 
         {/* HONEYMOON */}
@@ -168,7 +148,7 @@ const GiftForm = () => {
             </label>
           </div>
           <div className='col s4 l3'>
-            <span style={honeymoonAmountDisplay}>$  
+            <span style={giftSubmission.honeymoon.style}>$  
               <input
                 type='number'
                 placeholder=' Amount' 
@@ -196,7 +176,7 @@ const GiftForm = () => {
             </label>
           </div>
           <div className='col s4 l3'>
-            <span style={loanAmountDisplay}>$  
+            <span style={giftSubmission.loan.style}>$  
               <input
                 type='number'
                 placeholder=' Amount' 
@@ -224,7 +204,7 @@ const GiftForm = () => {
             </label>
           </div>
           <div className='col s4 l3'>
-            <span style={homeAmountDisplay}>$  
+            <span style={giftSubmission.home.style}>$  
               <input
                 type='number'
                 placeholder=' Amount' 
@@ -252,7 +232,7 @@ const GiftForm = () => {
             </label>
           </div>
           <div className='col s4 l3'>
-            <span style={therapyAmountDisplay}>$  
+            <span style={giftSubmission.therapy.style}>$  
               <input
                 type='number'
                 placeholder=' Amount' 
