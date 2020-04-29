@@ -16,76 +16,92 @@ const GiftForm = () => {
     display: 'none'
   };
 
-  const [giftSubmission, setGiftSubmission] = useState({
-    'honeymoon': {
-      'checkbox': false,
-      'amount': '',
-      'style': hideAmount
-    },
-    'loan': {
-      'checkbox': false,
-      'amount': '',
-      'style': hideAmount
-    },
-    'home': {
-      'checkbox': false,
-      'amount': '',
-      'style': hideAmount
-    },
-    'therapy': {
-      'checkbox': false,
-      'amount': '',
-      'style': hideAmount
-    },
+  const [gift, setGift] = useState({
     'name': '',
     'note': '',
-    'public': false
+    'public': false,
+    'funds': {
+      'honeymoon': {
+        'checkbox': false,
+        'amount': '',
+        'style': hideAmount,
+        'label': 'Honeymoon'
+      },
+      'loan': {
+        'checkbox': false,
+        'amount': '',
+        'style': hideAmount,
+        'label': 'Student Loan Debt'
+      },
+      'home': {
+        'checkbox': false,
+        'amount': '',
+        'style': hideAmount,
+        'label': 'Our First Home'
+      },
+      'therapy': {
+        'checkbox': false,
+        'amount': '',
+        'style': hideAmount,
+        'label': 'Therapy for Our Future Kids'
+      }
+    }
   });
-  console.log(giftSubmission);
+  console.log(gift);
+
+  const handleCheck = e => {
+    setGift({
+      ...gift,
+      [e.target.id]: e.target.checked
+    });
+  };
+
+  const handleTextChange = e => {
+    setGift({
+      ...gift,
+      [e.target.id]: e.target.value
+    });
+  };
   
   const handleFundCheck = e => {
     e.target.checked ? (
-      setGiftSubmission({
-        ...giftSubmission,
-        [e.target.name]: {
-          'checkbox': e.target.checked,
-          'amount': giftSubmission[e.target.name].amount,
-          'style': {}
+      setGift({
+        ...gift,
+        'funds': {
+          ...gift.funds,
+          [e.target.name]: {
+            ...gift.funds[e.target.name],
+            'checkbox': e.target.checked,
+            'style': {}
+          }
         }
       })
     ) : (
-      setGiftSubmission({
-        ...giftSubmission,
-        [e.target.name]: {
-          'checkbox': e.target.checked,
-          'amount': '',
-          'style': hideAmount
+      setGift({
+        ...gift,
+        'funds': {
+          ...gift.funds,
+          [e.target.name]: {
+            ...gift.funds[e.target.name],
+            'checkbox': e.target.checked,
+            'amount': '',
+            'style': hideAmount
+          }
         }
       })
     );
   };
 
   const handleFundAmountChange = e => {
-    setGiftSubmission({
-      ...giftSubmission,
-      [e.target.name] : {
-        'checkbox': giftSubmission[e.target.name].checkbox,
-        'amount': e.target.value
+    setGift({
+      ...gift,
+      'funds': {
+        ...gift.funds,
+        [e.target.name] : {
+          ...gift.funds[e.target.name],
+          'amount': e.target.value
+        }
       }
-    });
-  };
-
-  const handleCheck = e => {
-    setGiftSubmission({
-      ...giftSubmission,
-      [e.target.id]: e.target.checked
-    });
-  };
-
-  const handleTextChange = e => {
-    setGiftSubmission({
-      ...giftSubmission,
-      [e.target.id]: e.target.value
     });
   };
 
@@ -130,120 +146,40 @@ const GiftForm = () => {
       `}</style>
       <form onSubmit={e => {
         e.preventDefault();
-        //handleSubmit(); // TO DO: now that hook is working, just need to submit giftSubmission when dispatching the action
+        //handleSubmit(); // TO DO: now that hook is working, just need to submit gift when dispatching the action
       }}>
 
-        {/* HONEYMOON */}
-        <div className='row input-field' style={{height: '45px'}}>
-          <div className='col s4 l3 offset-s2 offset-l3'>
-            <label>
-              <input
-                type='checkbox'
-                className='filled-in'
-                name='honeymoon'
-                onChange={handleFundCheck}
-                checked={giftSubmission.honeymoon.checkbox}
-              />
-              <span style={checkboxMargin}>Honeymoon</span>
-            </label>
-          </div>
-          <div className='col s4 l3'>
-            <span style={giftSubmission.honeymoon.style}>$  
-              <input
-                type='number'
-                placeholder=' Amount' 
-                style={{width: '90%'}}
-                name='honeymoon'
-                onChange={handleFundAmountChange}
-                value={giftSubmission.honeymoon.amount}
-              />
-            </span>
-          </div>
-        </div>
-
-        {/* STUDENT LOAN DEBT */}
-        <div className='row input-field' style={{height: '45px'}}>
-          <div className='col s4 l3 offset-s2 offset-l3'>
-            <label>
-              <input
-                type='checkbox'
-                className='filled-in'
-                name='loan'
-                onChange={handleFundCheck}
-                checked={giftSubmission.loan.checkbox}
-              />
-              <span style={checkboxMargin}>Student Loan Debt</span>
-            </label>
-          </div>
-          <div className='col s4 l3'>
-            <span style={giftSubmission.loan.style}>$  
-              <input
-                type='number'
-                placeholder=' Amount' 
-                style={{width: '90%'}}
-                name='loan'
-                onChange={handleFundAmountChange}
-                value={giftSubmission.loan.amount}
-              />
-            </span>
-          </div>
-        </div>
-
-        {/* OUR FIRST HOME */}
-        <div className='row input-field' style={{height: '45px'}}>
-          <div className='col s4 l3 offset-s2 offset-l3'>
-            <label>
-              <input
-                type='checkbox'
-                className='filled-in'
-                name='home'
-                onChange={handleFundCheck}
-                checked={giftSubmission.home.checkbox}
-              />
-              <span style={checkboxMargin}>Our First Home</span>
-            </label>
-          </div>
-          <div className='col s4 l3'>
-            <span style={giftSubmission.home.style}>$  
-              <input
-                type='number'
-                placeholder=' Amount' 
-                style={{width: '90%'}}
-                name='home'
-                onChange={handleFundAmountChange}
-                value={giftSubmission.home.amount}
-              />
-            </span>
-          </div>
-        </div>
-
-        {/* THERAPY FOR OUR FUTURE KIDS */}
-        <div className='row input-field' style={{height: '45px'}}>
-          <div className='col s4 l3 offset-s2 offset-l3'>
-            <label>
-              <input
-                type='checkbox'
-                className='filled-in'
-                name='therapy'
-                onChange={handleFundCheck}
-                checked={giftSubmission.therapy.checkbox}
-              />
-              <span style={checkboxMargin}>Therapy for Our Future Kids</span>
-            </label>
-          </div>
-          <div className='col s4 l3'>
-            <span style={giftSubmission.therapy.style}>$  
-              <input
-                type='number'
-                placeholder=' Amount' 
-                style={{width: '90%'}}
-                name='therapy'
-                onChange={handleFundAmountChange}
-                value={giftSubmission.therapy.amount}
-              />
-            </span>
-          </div>
-        </div>
+        {/* FUNDS */}
+        {Object.keys(gift.funds).map(fund => {
+          return (
+            <div key={fund} className='row input-field' style={{height: '45px'}}>
+              <div className='col s4 l3 offset-s2 offset-l3'>
+                <label>
+                  <input
+                    type='checkbox'
+                    className='filled-in'
+                    name={fund}
+                    onChange={handleFundCheck}
+                    checked={gift.funds[fund].checkbox}
+                  />
+                  <span style={checkboxMargin}>{gift.funds[fund].label}</span>
+                </label>
+              </div>
+              <div className='col s4 l3'>
+                <span style={gift.funds[fund].style}>$  
+                  <input
+                    type='number'
+                    placeholder=' Amount' 
+                    style={{width: '90%'}}
+                    name={fund}
+                    onChange={handleFundAmountChange}
+                    value={gift.funds[fund].amount}
+                  />
+                </span>
+              </div>
+            </div>
+          );
+        })}
 
         {/* NAME */}
         <div className='input-field'>
@@ -253,7 +189,7 @@ const GiftForm = () => {
             style={textInputStyle}
             placeholder='Your Name' 
             onChange={handleTextChange}
-            value={giftSubmission.name}
+            value={gift.name}
           />
         </div>
 
@@ -265,11 +201,11 @@ const GiftForm = () => {
             className='materialize-textarea'
             placeholder='Include a note to the happy couple'
             onChange={handleTextChange}
-            value={giftSubmission.note}
+            value={gift.note}
           />
         </div>
 
-        {/* PUBLIC? */}
+        {/* PUBLIC */}
         <div className='input-field section'>
           <p>
             <label style={wideInputStyle}>
@@ -278,7 +214,7 @@ const GiftForm = () => {
                 className='filled-in' 
                 id='public'
                 onChange={handleCheck}
-                checked={giftSubmission.public}
+                checked={gift.public}
               />
               <span className='checkboxLabel'>
                 Publicly display my note, name, and which fund(s) I chose (the amount contributed will not be displayed)
@@ -286,6 +222,7 @@ const GiftForm = () => {
             </label>
           </p>
         </div>
+
         <button 
           style={btnStyle} 
           className='btn waves-effect waves-light'>
