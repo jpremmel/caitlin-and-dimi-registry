@@ -13,53 +13,88 @@ const GiftForm = () => {
   // );
 
   const [giftSubmission, setGiftSubmission] = useState({
-    'honeymoon-checkbox': false,
-    'honeymoon-amount': '',
-
-    'loan-checkbox': false,
-    'loan-amount': '',
-
-    'home-checkbox': false,
-    'home-amount': '',
-
-    'therapy-checkbox': false,
-    'therapy-amount': '',
+    'honeymoon': {
+      'checkbox': false,
+      'amount': ''
+    },
+    'loan': {
+      'checkbox': false,
+      'amount': ''
+    },
+    'home': {
+      'checkbox': false,
+      'amount': ''
+    },
+    'therapy': {
+      'checkbox': false,
+      'amount': ''
+    },
 
     'name': '',
     'note': '',
-    'public-checkbox': false
+    'public': false
   });
   console.log(giftSubmission);
 
   let honeymoonAmountDisplay = {};
-  if (!giftSubmission['honeymoon-checkbox']) {
+  if (!giftSubmission.honeymoon.checkbox) {
     honeymoonAmountDisplay = {
       display: 'none'
     };
-
   }
 
   let loanAmountDisplay = {};
-  if (!giftSubmission['loan-checkbox']) {
+  if (!giftSubmission.loan.checkbox) {
     loanAmountDisplay = {
       display: 'none'
     };
   }
 
   let homeAmountDisplay = {};
-  if (!giftSubmission['home-checkbox']) {
+  if (!giftSubmission.home.checkbox) {
     homeAmountDisplay = {
       display: 'none'
     };
   }
 
   let therapyAmountDisplay = {};
-  if (!giftSubmission['therapy-checkbox']) {
+  if (!giftSubmission.therapy.checkbox) {
     therapyAmountDisplay = {
       display: 'none'
     };
   }
   
+  const handleFundCheck = e => {
+    e.target.checked ? (
+      setGiftSubmission({
+        ...giftSubmission,
+        [e.target.name]: {
+          'checkbox': e.target.checked,
+          'amount': giftSubmission[e.target.name].amount
+        }
+      })
+    ) : (
+      setGiftSubmission({
+        ...giftSubmission,
+        [e.target.name]: {
+          'checkbox': e.target.checked,
+          'amount': ''
+        }
+      })
+    );
+    
+  };
+
+  const handleFundAmountChange = e => {
+    setGiftSubmission({
+      ...giftSubmission,
+      [e.target.name] : {
+        'checkbox': giftSubmission[e.target.name].checkbox,
+        'amount': e.target.value
+      }
+    });
+  };
+
   const handleCheck = e => {
     setGiftSubmission({
       ...giftSubmission,
@@ -125,9 +160,9 @@ const GiftForm = () => {
               <input
                 type='checkbox'
                 className='filled-in'
-                id='honeymoon-checkbox'
-                onChange={handleCheck}
-                checked={giftSubmission['honeymoon-checkbox']}
+                name='honeymoon'
+                onChange={handleFundCheck}
+                checked={giftSubmission.honeymoon.checkbox}
               />
               <span style={checkboxMargin}>Honeymoon</span>
             </label>
@@ -138,9 +173,9 @@ const GiftForm = () => {
                 type='number'
                 placeholder=' Amount' 
                 style={{width: '90%'}}
-                id='honeymoon-amount'
-                onChange={handleTextChange}
-                value={giftSubmission['honeymoon-amount']}
+                name='honeymoon'
+                onChange={handleFundAmountChange}
+                value={giftSubmission.honeymoon.amount}
               />
             </span>
           </div>
@@ -153,9 +188,9 @@ const GiftForm = () => {
               <input
                 type='checkbox'
                 className='filled-in'
-                id='loan-checkbox'
-                onChange={handleCheck}
-                checked={giftSubmission['loan-checkbox']}
+                name='loan'
+                onChange={handleFundCheck}
+                checked={giftSubmission.loan.checkbox}
               />
               <span style={checkboxMargin}>Student Loan Debt</span>
             </label>
@@ -166,9 +201,9 @@ const GiftForm = () => {
                 type='number'
                 placeholder=' Amount' 
                 style={{width: '90%'}}
-                id='loan-amount'
-                onChange={handleTextChange}
-                value={giftSubmission['loan-amount']}
+                name='loan'
+                onChange={handleFundAmountChange}
+                value={giftSubmission.loan.amount}
               />
             </span>
           </div>
@@ -181,9 +216,9 @@ const GiftForm = () => {
               <input
                 type='checkbox'
                 className='filled-in'
-                id='home-checkbox'
-                onChange={handleCheck}
-                checked={giftSubmission['home-checkbox']}
+                name='home'
+                onChange={handleFundCheck}
+                checked={giftSubmission.home.checkbox}
               />
               <span style={checkboxMargin}>Our First Home</span>
             </label>
@@ -194,9 +229,9 @@ const GiftForm = () => {
                 type='number'
                 placeholder=' Amount' 
                 style={{width: '90%'}}
-                id='home-amount'
-                onChange={handleTextChange}
-                value={giftSubmission['home-amount']}
+                name='home'
+                onChange={handleFundAmountChange}
+                value={giftSubmission.home.amount}
               />
             </span>
           </div>
@@ -209,9 +244,9 @@ const GiftForm = () => {
               <input
                 type='checkbox'
                 className='filled-in'
-                id='therapy-checkbox'
-                onChange={handleCheck}
-                checked={giftSubmission['therapy-checkbox']}
+                name='therapy'
+                onChange={handleFundCheck}
+                checked={giftSubmission.therapy.checkbox}
               />
               <span style={checkboxMargin}>Therapy for Our Future Kids</span>
             </label>
@@ -222,9 +257,9 @@ const GiftForm = () => {
                 type='number'
                 placeholder=' Amount' 
                 style={{width: '90%'}}
-                id='therapy-amount'
-                onChange={handleTextChange}
-                value={giftSubmission['therapy-amount']}
+                name='therapy'
+                onChange={handleFundAmountChange}
+                value={giftSubmission.therapy.amount}
               />
             </span>
           </div>
@@ -238,7 +273,7 @@ const GiftForm = () => {
             style={textInputStyle}
             placeholder='Your Name' 
             onChange={handleTextChange}
-            value={giftSubmission['name']}
+            value={giftSubmission.name}
           />
         </div>
 
@@ -250,7 +285,7 @@ const GiftForm = () => {
             className='materialize-textarea'
             placeholder='Include a note to the happy couple'
             onChange={handleTextChange}
-            value={giftSubmission['note']}
+            value={giftSubmission.note}
           />
         </div>
 
@@ -261,9 +296,9 @@ const GiftForm = () => {
               <input  
                 type='checkbox' 
                 className='filled-in' 
-                id='public-checkbox'
+                id='public'
                 onChange={handleCheck}
-                checked={giftSubmission['public-checkbox']}
+                checked={giftSubmission.public}
               />
               <span className='checkboxLabel'>
                 Publicly display my note, name, and which fund(s) I chose (the amount contributed will not be displayed)
