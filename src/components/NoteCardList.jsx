@@ -1,51 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import NoteCard from './NoteCard';
 
 const NoteCardList = (props) => {
 
   useFirestoreConnect('gifts');
   const giftList = useSelector(state => state.firestore.data['gifts']);
-  console.log(giftList);
 
-  const lavendarBackground = {
-    backgroundColor: '#e6d7f4'
-  };
-  const goldBackground = {
-    backgroundColor: '#ffd480'
-  };
-  const tealBackground = {
-    backgroundColor: '#a6e8e6'
-  };
-  return (
-    <div className='container row'>
-      <div className='col s12 m6 offset-m3'>
+  const lavendar = '#e6d7f4';
+  const gold = '#ffd480';
+  const teal = '#a6e8e6';
+  const backgroundColors = [lavendar, gold, teal];
+  // const [currentColor, setCurrentColor] = useState(0);
+  // const nextColor = () => {
+  //   let nextColor;
+  //   console.log(backgroundColors.length);
+  //   if (currentColor < backgroundColors.length - 1) {
+  //     nextColor = currentColor + 1;
+  //   } else {
+  //     nextColor = 0;
+  //   }
+  //   console.log(nextColor);
+  //   setCurrentColor(nextColorIndex);
+  // }
 
-        <div className='card' style={lavendarBackground}>
-          <div className='card-content'>
-            <p>I'm so excited for Dimi to be part of the family. All my money went to therapy for your future kids - they're definitely gonna need it!! Love you both so much and I'm so excited for your special day.</p>
-            <span className='card-title' style={{ textAlign: 'right'}}>- Jacqueline</span>
-          </div>
+  if (giftList) {
+    return (
+      <div className='container row'>
+        <div className='col s12 m6 offset-m3'>
+          {Object.keys(giftList).map(gift => {
+            if (giftList[gift].public) {
+              return (
+                <NoteCard
+                  key={gift}
+                  color={lavendar}
+                  note={giftList[gift].note}
+                  name={giftList[gift].name}
+                />
+              );
+            } else {
+              return null;
+            }
+          })}
         </div>
-
-        <div className='card' style={goldBackground}>
-          <div className='card-content'>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <span className='card-title' style={{ textAlign: 'right'}}>- Family Member</span>
-          </div>
-        </div>
-
-        <div className='card' style={tealBackground}>
-          <div className='card-content'>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <span className='card-title' style={{ textAlign: 'right'}}>- Your Friend</span>
-          </div>
-        </div>
-
       </div>
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 };
 
 const mapStateToProps = (state) => ({

@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { submitGiftForm } from '../actions';
 import { useFirestore } from 'react-redux-firebase';
-import { connect, useDispatch } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch } from 'react-redux';
 
 const GiftForm = () => {
   const firestore = useFirestore();
@@ -49,7 +48,6 @@ const GiftForm = () => {
       }
     }
   });
-  //console.log(gift);
 
   const handleCheck = e => {
     setGift({
