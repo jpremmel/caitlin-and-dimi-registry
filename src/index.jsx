@@ -24,7 +24,7 @@ firebase.initializeApp(firebaseConfig);
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunkMiddleware.withExtraArgument({ getFirebase, getFirestore })),
+    applyMiddleware(thunkMiddleware.withExtraArgument({ getFirebase, getFirestore })), //TO DO: try removing these methods and see if everything still works, I don't think I need them
     reduxFirestore(firebase)
   )
 );
