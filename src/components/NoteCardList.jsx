@@ -4,7 +4,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import NoteCard from './NoteCard';
 
-const NoteCardList = (props) => {
+const NoteCardList = () => {
 
   useFirestoreConnect('gifts');
   const giftList = useSelector(state => state.firestore.data['gifts']);
@@ -52,10 +52,4 @@ const NoteCardList = (props) => {
   }
 };
 
-const mapStateToProps = (state) => ({
-    gifts: state.gifts
-});
-
-export default compose(
-  connect(mapStateToProps)
-)(NoteCardList);
+export default compose(connect())(NoteCardList);
