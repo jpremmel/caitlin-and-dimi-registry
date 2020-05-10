@@ -3,7 +3,8 @@ import React from 'react';
 const NoteCard = ({ color, note, name }) => {
 
   const badges = {
-    marginBottom: '15px'
+    marginBottom: '15px',
+    display: 'inline-block'
   };
 
   return (

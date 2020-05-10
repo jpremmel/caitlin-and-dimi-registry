@@ -1,109 +1,19 @@
-import React, { useCallback, useState } from 'react';
-import { submitGiftForm } from '../actions';
+import React, { useCallback } from 'react';
+import { updateFundCheckbox, updateFundAmountInput, updateCheckbox, updateTextInput, submitGiftForm } from '../actions';
 import { useFirestore } from 'react-redux-firebase';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
-const GiftForm = () => {
+const GiftForm = ({ gift, dispatch }) => {
+
+  console.log(gift);
+
   const firestore = useFirestore();
-  const dispatch = useDispatch();
   const handleSubmit = useCallback(
     gift => {
       dispatch(submitGiftForm({ firestore }, gift));
     },
     [firestore]
   );
-
-  const hideAmount = {
-    display: 'none'
-  };
-
-  const [gift, setGift] = useState({
-    'name': '',
-    'note': '',
-    'public': false,
-    'funds': {
-      'honeymoon': {
-        'checkbox': false,
-        'amount': '',
-        'style': hideAmount,
-        'label': 'Honeymoon'
-      },
-      'loan': {
-        'checkbox': false,
-        'amount': '',
-        'style': hideAmount,
-        'label': 'Student Loan Debt'
-      },
-      'home': {
-        'checkbox': false,
-        'amount': '',
-        'style': hideAmount,
-        'label': 'Our First Home'
-      },
-      'therapy': {
-        'checkbox': false,
-        'amount': '',
-        'style': hideAmount,
-        'label': 'Therapy for Our Future Kids'
-      }
-    }
-  });
-
-  const handleCheck = e => {
-    setGift({
-      ...gift,
-      [e.target.id]: e.target.checked
-    });
-  };
-
-  const handleTextChange = e => {
-    setGift({
-      ...gift,
-      [e.target.id]: e.target.value
-    });
-  };
-  
-  const handleFundCheck = e => {
-    e.target.checked ? (
-      setGift({
-        ...gift,
-        'funds': {
-          ...gift.funds,
-          [e.target.name]: {
-            ...gift.funds[e.target.name],
-            'checkbox': e.target.checked,
-            'style': {}
-          }
-        }
-      })
-    ) : (
-      setGift({
-        ...gift,
-        'funds': {
-          ...gift.funds,
-          [e.target.name]: {
-            ...gift.funds[e.target.name],
-            'checkbox': e.target.checked,
-            'amount': '',
-            'style': hideAmount
-          }
-        }
-      })
-    );
-  };
-
-  const handleFundAmountChange = e => {
-    setGift({
-      ...gift,
-      'funds': {
-        ...gift.funds,
-        [e.target.name] : {
-          ...gift.funds[e.target.name],
-          'amount': e.target.value
-        }
-      }
-    });
-  };
 
   const checkboxMargin = {
     marginRight: '15px',
@@ -159,7 +69,7 @@ const GiftForm = () => {
                     type='checkbox'
                     className='filled-in'
                     name={fund}
-                    onChange={handleFundCheck}
+                    onChange={(event) => {dispatch(updateFundCheckbox(event, gift))}}
                     checked={gift.funds[fund].checkbox}
                   />
                   <span style={checkboxMargin}>{gift.funds[fund].label}</span>
@@ -172,7 +82,7 @@ const GiftForm = () => {
                     placeholder=' Amount' 
                     style={{width: '90%'}}
                     name={fund}
-                    onChange={handleFundAmountChange}
+                    onChange={(event) => {dispatch(updateFundAmountInput(event, gift))}}
                     value={gift.funds[fund].amount}
                   />
                 </span>
@@ -188,7 +98,7 @@ const GiftForm = () => {
             type='text' 
             style={textInputStyle}
             placeholder='Your Name' 
-            onChange={handleTextChange}
+            onChange={(event) => {dispatch(updateTextInput(event, gift))}}
             value={gift.name}
           />
         </div>
@@ -200,7 +110,7 @@ const GiftForm = () => {
             style={wideInputStyle}
             className='materialize-textarea'
             placeholder='Include a note to the happy couple'
-            onChange={handleTextChange}
+            onChange={(event) => {dispatch(updateTextInput(event, gift))}}
             value={gift.note}
           />
         </div>
@@ -213,7 +123,7 @@ const GiftForm = () => {
                 type='checkbox' 
                 className='filled-in' 
                 id='public'
-                onChange={handleCheck}
+                onChange={(event) => {dispatch(updateCheckbox(event, gift))}}
                 checked={gift.public}
               />
               <span className='checkboxLabel'>
@@ -236,4 +146,8 @@ const GiftForm = () => {
   );
 };
 
-export default GiftForm;
+const mapStateToProps = state => ({
+  gift: state.gift
+});
+
+export default connect(mapStateToProps)(GiftForm);

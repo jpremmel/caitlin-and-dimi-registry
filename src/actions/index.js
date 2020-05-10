@@ -1,7 +1,38 @@
+
+export const updateFundCheckbox = (event, gift) => ({
+  type: 'UPDATE_FUND_CHECKBOX',
+  event,
+  gift
+});
+
+export const updateFundAmountInput = (event, gift) => ({
+  type: 'UPDATE_FUND_AMOUNT',
+  event,
+  gift
+});
+
+export const updateTextInput = (event, gift) => ({
+  type: 'UPDATE_TEXT',
+  event,
+  gift
+});
+
+export const updateCheckbox = (event, gift) => ({
+  type: 'UPDATE_CHECKBOX',
+  event,
+  gift
+});
+
 export const submitGiftForm = ({ firestore }, gift) => {
   Object.keys(gift.funds).map(fund => {
-    delete gift.funds[fund].style;
-    delete gift.funds[fund].label;
+    if (!gift.funds[fund].checkbox || !gift.funds[fund].amount) {
+      //delete the fund and all its subfields from the gift
+      delete gift.funds[fund];
+    } else {
+      delete gift.funds[fund].checkbox;
+      delete gift.funds[fund].style;
+      delete gift.funds[fund].label;
+    }
   });
   const timestampedGift = {
     ...gift,
@@ -13,12 +44,10 @@ export const submitGiftForm = ({ firestore }, gift) => {
 
     const fundTotals = getState().firestore.data.totals;
 
-    const newHoneyMoonTotal = fundTotals.funds.honeymoon + parseInt(timestampedGift.funds.honeymoon.amount);
-    const newLoansTotal = fundTotals.funds.loans + parseInt(timestampedGift.funds.loan.amount);
-    const newHomeTotal = fundTotals.funds.home + parseInt(timestampedGift.funds.home.amount);
-    const newTherapyTotal = fundTotals.funds.therapy + parseInt(timestampedGift.funds.therapy.amount);
+    //Promise.all([promise1, promise2, promise3]); --> bundles lots of promises into one big one. Do all the firestore calls before altering state: bundle them together into one promise then only after that, dispatch the action to clear the state of the gift form.
 
-    if (newHoneyMoonTotal) {
+    if (timestampedGift.funds.honeymoon) {
+      const newHoneyMoonTotal = fundTotals.funds.honeymoon + parseFloat(timestampedGift.funds.honeymoon.amount);
       firestore
         .collection('totals')
         .doc('funds')
@@ -31,7 +60,8 @@ export const submitGiftForm = ({ firestore }, gift) => {
         })
     }
 
-    if (newLoansTotal) {
+    if (timestampedGift.funds.loan) {
+      const newLoansTotal = fundTotals.funds.loans + parseFloat(timestampedGift.funds.loan.amount);
       firestore
       .collection('totals')
       .doc('funds')
@@ -44,7 +74,8 @@ export const submitGiftForm = ({ firestore }, gift) => {
       })
     }
 
-    if (newHomeTotal) {
+    if (timestampedGift.funds.home) {
+      const newHomeTotal = fundTotals.funds.home + parseFloat(timestampedGift.funds.home.amount);
       firestore
       .collection('totals')
       .doc('funds')
@@ -57,7 +88,8 @@ export const submitGiftForm = ({ firestore }, gift) => {
       })
     }
 
-    if (newTherapyTotal) {
+    if (timestampedGift.funds.therapy) {
+      const newTherapyTotal = fundTotals.funds.therapy + parseFloat(timestampedGift.funds.therapy.amount);
       firestore
       .collection('totals')
       .doc('funds')
@@ -75,6 +107,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
       .add(timestampedGift)
       .then(() => {
         console.log('Added gift to firestore.');
+        dispatch({ type: 'RESET_FORM' });
       })
       .catch(err => {
         console.log('Error: ', err);

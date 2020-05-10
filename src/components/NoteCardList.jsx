@@ -31,7 +31,7 @@ const NoteCardList = () => {
       <div className='container row'>
         <div className='col s12 m6 offset-m3'>
           {Object.keys(giftList).map(gift => {
-            if (giftList[gift].public) {
+            if (giftList[gift] && giftList[gift].public) {
               return (
                 <NoteCard
                   key={gift}
