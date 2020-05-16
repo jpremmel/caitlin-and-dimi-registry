@@ -5,16 +5,12 @@ import { compose } from 'redux';
 import NoteCard from './NoteCard';
 
 const NoteCardList = () => {
-
   useFirestoreConnect('gifts');
   const giftList = useSelector(state => state.firestore.data['gifts']);
+  
+  const backgroundColors = ['#a6e8e6', '#e6d7f4', '#ffe6b3' ];
 
-  const lavendar = '#e6d7f4';
-  const gold = '#ffd480';
-  const teal = '#a6e8e6';
-  const backgroundColors = [lavendar, gold, teal];
-
-  let currentColor = 2;
+  let currentColor = 0;
   const getCurrentColor = () => {
     if (currentColor < backgroundColors.length - 1) {
       currentColor++;
@@ -28,14 +24,13 @@ const NoteCardList = () => {
     return (
       <div className='container row'>
         <div className='col s12 m6 offset-m3'>
-          {Object.keys(giftList).map(gift => {
-            if (giftList[gift] && giftList[gift].public) {
+          {Object.keys(giftList).map(giftId => {
+            if (giftList[giftId] && giftList[giftId].public) {
               return (
                 <NoteCard
-                  key={gift}
+                  key={giftId}
+                  gift={giftList[giftId]}
                   color={backgroundColors[getCurrentColor()]}
-                  note={giftList[gift].note}
-                  name={giftList[gift].name}
                 />
               );
             } else {
