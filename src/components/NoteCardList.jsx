@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect, useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -13,18 +13,16 @@ const NoteCardList = () => {
   const gold = '#ffd480';
   const teal = '#a6e8e6';
   const backgroundColors = [lavendar, gold, teal];
-  // const [currentColor, setCurrentColor] = useState(0);
-  // const nextColor = () => {
-  //   let nextColor;
-  //   console.log(backgroundColors.length);
-  //   if (currentColor < backgroundColors.length - 1) {
-  //     nextColor = currentColor + 1;
-  //   } else {
-  //     nextColor = 0;
-  //   }
-  //   console.log(nextColor);
-  //   setCurrentColor(nextColorIndex);
-  // }
+
+  let currentColor = 2;
+  const getCurrentColor = () => {
+    if (currentColor < backgroundColors.length - 1) {
+      currentColor++;
+    } else {
+      currentColor = 0;
+    }
+    return currentColor;
+  }
 
   if (giftList) {
     return (
@@ -35,7 +33,7 @@ const NoteCardList = () => {
               return (
                 <NoteCard
                   key={gift}
-                  color={lavendar}
+                  color={backgroundColors[getCurrentColor()]}
                   note={giftList[gift].note}
                   name={giftList[gift].name}
                 />
