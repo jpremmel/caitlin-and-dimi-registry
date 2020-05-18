@@ -9,15 +9,16 @@ import Chart from './Chart';
 import NoteCardList from './NoteCardList';
 import GiftForm from './GiftForm';
 
+
 const App = () => {
 
-  useEffect(() => {
-    // Initialize materialize parallax animation when App mounts
-    var parallax = document.querySelectorAll('.parallax');
+  useEffect(() => { // When App mounts, do the following:
+    // Initialize materialize parallax
+    const parallax = document.querySelectorAll('.parallax');
     M.Parallax.init(parallax, {});
 
-    // Initialize materialize tabs animation when App mounts
-    var tabs = document.querySelectorAll('.tabs');
+    // Initialize materialize tabs
+    const tabs = document.querySelectorAll('.tabs');
     M.Tabs.init(tabs);
   }, []);
 
@@ -28,7 +29,7 @@ const App = () => {
   `;
 
   const coverPhotoStyle = {
-    // width: '100%'
+    // width: '100%' //TO DO: Try re-adjusting width of the cover photo
   };
 
   return (

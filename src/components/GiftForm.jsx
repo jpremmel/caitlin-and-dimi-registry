@@ -1,15 +1,21 @@
 import React, { useCallback } from 'react';
-import { updateFundCheckbox, updateFundAmountInput, updateCheckbox, updateTextInput, submitGiftForm } from '../actions';
 import { useFirestore } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import { 
+  updateFundCheckbox, 
+  updateFundAmountInput, 
+  updateCheckbox, 
+  updateTextInput, 
+  submitGiftForm
+} from '../actions';
+import Modal from './Modal';
 
 const GiftForm = ({ gift, dispatch }) => {
 
-  console.log(gift);
-
   const firestore = useFirestore();
   const handleSubmit = useCallback(
-    gift => {
+    (e, gift) => {
+      e.preventDefault();
       dispatch(submitGiftForm({ firestore }, gift));
     },
     [firestore]
@@ -54,10 +60,7 @@ const GiftForm = ({ gift, dispatch }) => {
           box-shadow: 0 1px 0 0 #803370;
         }
       `}</style>
-      <form onSubmit={e => {
-        e.preventDefault();
-        handleSubmit(gift);
-      }}>
+      <form onSubmit={e => { handleSubmit(e, gift); }}>
 
         {/* FUNDS */}
         {Object.keys(gift.funds).map(fund => {
@@ -133,14 +136,18 @@ const GiftForm = ({ gift, dispatch }) => {
           </p>
         </div>
 
-        <button 
-          style={btnStyle} 
-          className='btn waves-effect waves-light'>
-            <i className="material-icons left">
-              card_giftcard
-            </i>
-          Add My Gift
-        </button>
+        <Modal
+          header="Modal Header!"
+          trigger={
+            <button 
+              style={btnStyle} 
+              className='btn waves-effect waves-light'>
+                <i className="material-icons left">
+                  card_giftcard
+                </i>
+              Add My Gift
+            </button>
+          } />
       </form>
     </div>
   );

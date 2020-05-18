@@ -1,4 +1,3 @@
-
 export const updateFundCheckbox = (event, gift) => ({
   type: 'UPDATE_FUND_CHECKBOX',
   event,
@@ -44,7 +43,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
 
     const fundTotals = getState().firestore.data.totals;
 
-    //Promise.all([promise1, promise2, promise3]); --> bundles lots of promises into one big one. Do all the firestore calls before altering state: bundle them together into one promise then only after that, dispatch the action to clear the state of the gift form.
+    //Promise.all([promise1, promise2, promise3]); --> bundles lots of promises into one big one. Do I want to use this?
 
     if (timestampedGift.funds.honeymoon) {
       const newHoneyMoonTotal = fundTotals.funds.honeymoon + parseFloat(timestampedGift.funds.honeymoon.amount);

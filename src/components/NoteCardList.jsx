@@ -1,12 +1,10 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
-import { useFirestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import NoteCard from './NoteCard';
 
-const NoteCardList = () => {
-  useFirestoreConnect('gifts');
-  const giftList = useSelector(state => state.firestore.data['gifts']);
+const NoteCardList = ({ giftList }) => {
   
   const backgroundColors = ['#a6e8e6', '#e6d7f4', '#ffe6b3' ];
 
@@ -45,4 +43,9 @@ const NoteCardList = () => {
   }
 };
 
-export default compose(connect())(NoteCardList);
+export default compose(
+  firestoreConnect(() => ['gifts']),
+  connect((state) => ({
+    giftList: state.firestore.data['gifts']
+  }))
+)(NoteCardList);

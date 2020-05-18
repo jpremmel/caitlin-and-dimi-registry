@@ -3,7 +3,7 @@ import { HoneymoonBadge, LoanBadge, HomeBadge, TherapyBadge } from './Badges';
 
 const NoteCard = ({ color, gift }) => {
 
-  console.log(gift);
+  // console.log(gift);
 
   let honeymoonBadge;
   let loanBadge;
