@@ -111,5 +111,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
       .catch(err => {
         console.log('Error: ', err);
       });
+
+    dispatch({ type: 'SHOW_MODAL' });
   };
 };

@@ -136,18 +136,16 @@ const GiftForm = ({ gift, dispatch }) => {
           </p>
         </div>
 
-        <Modal
-          header="Modal Header!"
-          trigger={
-            <button 
-              style={btnStyle} 
-              className='btn waves-effect waves-light'>
-                <i className="material-icons left">
-                  card_giftcard
-                </i>
-              Add My Gift
-            </button>
-          } />
+        <button 
+          style={btnStyle} 
+          className='btn waves-effect waves-light'>
+            <i className="material-icons left">
+              card_giftcard
+            </i>
+          Add My Gift
+        </button>
+
+        <Modal>This is inside the modal!</Modal>
       </form>
     </div>
   );
