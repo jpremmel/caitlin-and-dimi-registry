@@ -5,20 +5,23 @@ import './Modal.css';
 
 const Modal = ({ children, showModal, dispatch }) => {
   console.log('Modal should be showing: ', showModal);
-  const content = showModal && (
-    <div className='overlay'>
-      <div className='modal'>
-        <button
-          className='modal-close' 
-          onClick={() => { dispatch({ type: 'HIDE_MODAL' }) }} >
-          X
-        </button>
-        <div className='modal-body'>
-          {children}
+  let content;
+  if (showModal) {
+    content = showModal && (
+      <div className='overlay'>
+        <div className='modal-wrapper'>
+          <button
+            className='modal-close' 
+            onClick={() => { dispatch({ type: 'HIDE_MODAL' }) }} >
+            X
+          </button>
+          <div className='modal-body'>
+            {children}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
   return createPortal(content, document.body);
 };
 

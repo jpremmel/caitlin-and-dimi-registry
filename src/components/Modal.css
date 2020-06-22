@@ -13,7 +13,7 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.modal {
+.modal-wrapper {
   z-index: 99;
   /* Everything below is optional styling */
   position: relative;
