@@ -144,9 +144,8 @@ const GiftForm = ({ gift, dispatch }) => {
             </i>
           Add My Gift
         </button>
-
-        <Modal>This is inside the modal!</Modal>
       </form>
+      <Modal />
     </div>
   );
 };

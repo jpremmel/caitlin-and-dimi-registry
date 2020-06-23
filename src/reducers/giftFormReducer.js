@@ -53,6 +53,7 @@ const giftFormReducer = (state = initialGiftFormState, action) => {
         [action.event.target.id]: action.event.target.checked
       };
     case 'RESET_FORM':
+      console.log('resetting form');
       return initialGiftFormState;
     default:
       return state;
