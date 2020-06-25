@@ -7,7 +7,6 @@ import NoteCard from './NoteCard';
 const NoteCardList = ({ giftList }) => {
   
   const backgroundColors = ['#a6e8e6', '#e6d7f4', '#ffe6b3' ];
-
   let currentColor = 0;
   const getCurrentColor = () => {
     if (currentColor < backgroundColors.length - 1) {
@@ -18,22 +17,39 @@ const NoteCardList = ({ giftList }) => {
     return currentColor;
   }
 
+  const sortCards = (unsortedCards) => {
+    let recentCards = [];
+    let randomlySortedCards = [];
+    Object.keys(unsortedCards).map(cardId => {
+      if (unsortedCards[cardId].public) {
+        //if the card is from within the last hour, add it to the recentCards array
+
+        randomlySortedCards.push(unsortedCards[cardId]); //otherwise add it to the randomlySortedCards array
+      }
+    });
+    let i, j, k;  //Fisher Yates Method to randomly sort cards
+    for (i = randomlySortedCards.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * i);
+      k = randomlySortedCards[i];
+      randomlySortedCards[i] = randomlySortedCards[j];
+      randomlySortedCards[j] = k;
+    }
+    return recentCards.concat(randomlySortedCards);
+  };
+
   if (giftList) {
+    const sortedCards = sortCards(giftList);
     return (
       <div className='container row'>
         <div className='col s12 m6 offset-m3'>
-          {Object.keys(giftList).map(giftId => {
-            if (giftList[giftId] && giftList[giftId].public) {
-              return (
-                <NoteCard
-                  key={giftId}
-                  gift={giftList[giftId]}
-                  color={backgroundColors[getCurrentColor()]}
-                />
-              );
-            } else {
-              return null;
-            }
+          {sortedCards.map((card, index) => {
+            return (
+              <NoteCard
+                key={index}
+                gift={card}
+                color={backgroundColors[getCurrentColor()]}
+              />
+            );
           })}
         </div>
       </div>
