@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import NoteCard from './NoteCard';
+import moment from 'moment';
 
 const NoteCardList = ({ giftList }) => {
   
@@ -18,13 +19,16 @@ const NoteCardList = ({ giftList }) => {
   }
 
   const sortCards = (unsortedCards) => {
-    let recentCards = [];
-    let randomlySortedCards = [];
+    const recentCards = [];
+    const randomlySortedCards = [];
+    const oneHourAgo = moment().subtract(1, 'hours');
     Object.keys(unsortedCards).map(cardId => {
       if (unsortedCards[cardId].public) {
-        //if the card is from within the last hour, add it to the recentCards array
-
-        randomlySortedCards.push(unsortedCards[cardId]); //otherwise add it to the randomlySortedCards array
+        if (moment(unsortedCards[cardId].timestamp).isAfter(oneHourAgo)) {
+          recentCards.push(unsortedCards[cardId]);
+        } else {
+          randomlySortedCards.push(unsortedCards[cardId]); //otherwise add it to the randomlySortedCards array
+        }
       }
     });
     let i, j, k;  //Fisher Yates Method to randomly sort cards
