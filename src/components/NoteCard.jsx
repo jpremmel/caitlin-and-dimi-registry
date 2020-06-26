@@ -3,12 +3,14 @@ import { HoneymoonBadge, LoanBadge, HomeBadge, TherapyBadge } from './Badges';
 
 const NoteCard = ({ color, gift }) => {
 
-  // console.log(gift);
-
+  let signature;
   let honeymoonBadge;
   let loanBadge;
   let homeBadge;
   let therapyBadge;
+
+  if (gift && gift.name)
+    signature = <span>- {gift.name}</span>
 
   if (gift && gift.funds && gift.funds.honeymoon)
     honeymoonBadge = <HoneymoonBadge />;
@@ -28,10 +30,10 @@ const NoteCard = ({ color, gift }) => {
   };
 
   return (
-    <div className='card' style={{ backgroundColor: color}}>
+    <div className='card' style={{ backgroundColor: color/*, textAlign: 'center'*/}}>
       <div className='card-content'>
         <p>{gift.note}</p>
-        <span className='card-title' style={{ textAlign: 'right'}}>- {gift.name}</span>
+        <span className='card-title' style={{ textAlign: 'right'}}>{signature}</span>
         <div style={badgesStyle}>
           {honeymoonBadge}
           {loanBadge}

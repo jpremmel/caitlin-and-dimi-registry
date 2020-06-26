@@ -25,9 +25,9 @@ const NoteCardList = ({ giftList }) => {
     Object.keys(unsortedCards).map(cardId => {
       if (unsortedCards[cardId].public) {
         if (moment(unsortedCards[cardId].timestamp).isAfter(oneHourAgo)) {
-          recentCards.push(unsortedCards[cardId]);
+          recentCards.unshift(unsortedCards[cardId]);
         } else {
-          randomlySortedCards.push(unsortedCards[cardId]); //otherwise add it to the randomlySortedCards array
+          randomlySortedCards.push(unsortedCards[cardId]);
         }
       }
     });
@@ -47,13 +47,15 @@ const NoteCardList = ({ giftList }) => {
       <div className='container row'>
         <div className='col s12 m6 offset-m3'>
           {sortedCards.map((card, index) => {
-            return (
-              <NoteCard
-                key={index}
-                gift={card}
-                color={backgroundColors[getCurrentColor()]}
-              />
-            );
+            if (card.name || card.note) {
+              return (
+                <NoteCard
+                  key={index}
+                  gift={card}
+                  color={backgroundColors[getCurrentColor()]}
+                />
+              );
+            }
           })}
         </div>
       </div>
