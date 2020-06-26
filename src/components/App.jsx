@@ -5,6 +5,7 @@ import CoverPhoto from '../images/CoverPhoto.jpg';
 import PhotoOverlay from './PhotoOverlay';
 import Navbar from './Navbar';
 import PageHeader from './PageHeader';
+import FundGrid from './FundGrid';
 import Chart from './Chart';
 import NoteCardList from './NoteCardList';
 import GiftForm from './GiftForm';
@@ -44,6 +45,11 @@ const App = () => {
       <div style={{ marginBottom: '40px'}}>
         <Navbar />
         <div id='registry'>
+          <PageHeader headerText='Welcome to our wedding registry!' />
+          <div className='container' style={{fontSize: '17px', padding: '0 40px 30px' }}>
+            <p>Instead of a typical registry at a store, we'd like our guests to help us decide how best to invest in what will surely be a very expensive life together. Our wedding gift funds are:</p>
+          </div>
+          <FundGrid />
           <PageHeader headerText="Wedding Registry Funds: Current Status" />
           <Chart />
         </div>
