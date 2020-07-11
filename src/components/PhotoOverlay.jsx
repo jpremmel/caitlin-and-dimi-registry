@@ -6,9 +6,7 @@ const PhotoOverlay = () => {
     textAlign: 'center'
   };
   const mainHeaderStyle = {
-    fontFamily: 'Marcellus, serif',
-    fontSize: '5.6rem',
-    marginTop: '3.8rem'
+    fontFamily: 'Marcellus, serif'
   };
   return (
       <div className='container'>
