@@ -9,6 +9,7 @@ import FundGrid from './FundGrid';
 import Chart from './Chart';
 import NoteCardList from './NoteCardList';
 import GiftForm from './GiftForm';
+import './App.css';
 
 
 const App = () => {
@@ -23,19 +24,12 @@ const App = () => {
     M.Tabs.init(tabs);
   }, []);
 
-  const parallaxHeight = `
-    .parallax-container {
-      height: 700px;
-    }
-  `;
-
   const coverPhotoStyle = {
-    // width: '100%' //TO DO: Try re-adjusting width of the cover photo
+    maxWidth: '100%'
   };
 
   return (
     <div>
-      <style>{parallaxHeight}</style>
       <div className='parallax-container'>
         <div className='parallax' >
           <img src={CoverPhoto} style={coverPhotoStyle} />
