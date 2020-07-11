@@ -12,8 +12,6 @@ import Modal from './Modal';
 
 const GiftForm = ({ gift, dispatch }) => {
 
-  console.log ('Gift form state: ', gift);
-
   const firestore = useFirestore();
   const handleSubmit = useCallback(
     (e, gift) => {
