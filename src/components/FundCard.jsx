@@ -1,11 +1,17 @@
 import React from 'react';
 
-const FundCard = ({ photo, title, content, float }) => {
+const FundCard = ({ photo, title, content, float, color }) => {
   return (
     <div className='col s6'>
-      <div className='card medium' style={{ maxWidth: '400px', float: float }}>
+      <div 
+        className='card medium' 
+        style={{ 
+          maxWidth: '300px', 
+          float: float, 
+          backgroundColor: color
+        }} >
         <div className='card-image'>
-          <img src={photo} style={{ objectFit: 'cover', maxHeight: '300px' }} />
+          <img src={photo} style={{ objectFit: 'cover', maxHeight: '240px' }} />
         </div>
         <div className='card-content'>
           <span className='card-title' style={{ fontFamily: 'Marcellus, serif', textAlign: 'center' }}>{title}</span>
