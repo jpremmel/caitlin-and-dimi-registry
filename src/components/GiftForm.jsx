@@ -12,6 +12,8 @@ import Modal from './Modal';
 
 const GiftForm = ({ gift, dispatch }) => {
 
+  console.log ('Gift form state: ', gift);
+
   const firestore = useFirestore();
   const handleSubmit = useCallback(
     (e, gift) => {
@@ -87,6 +89,7 @@ const GiftForm = ({ gift, dispatch }) => {
                     name={fund}
                     onChange={(event) => {dispatch(updateFundAmountInput(event, gift))}}
                     value={gift.funds[fund].amount}
+                    required={gift.funds[fund].checkbox}
                   />
                 </span>
               </div>
@@ -103,6 +106,7 @@ const GiftForm = ({ gift, dispatch }) => {
             placeholder='Your Name' 
             onChange={(event) => {dispatch(updateTextInput(event, gift))}}
             value={gift.name}
+            required={gift.public}
           />
         </div>
 
@@ -115,6 +119,7 @@ const GiftForm = ({ gift, dispatch }) => {
             placeholder='Include a note to the happy couple'
             onChange={(event) => {dispatch(updateTextInput(event, gift))}}
             value={gift.note}
+            required={gift.public}
           />
         </div>
 
