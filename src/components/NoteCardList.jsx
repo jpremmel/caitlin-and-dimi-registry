@@ -21,10 +21,10 @@ const NoteCardList = ({ giftList }) => {
   const sortCards = (unsortedCards) => {
     const recentCards = [];
     const randomlySortedCards = [];
-    const oneHourAgo = moment().subtract(1, 'hours');
+    const twelveHoursAgo = moment().subtract(12, 'hours');
     Object.keys(unsortedCards).map(cardId => {
       if (unsortedCards[cardId].public) {
-        if (moment(unsortedCards[cardId].timestamp).isAfter(oneHourAgo)) {
+        if (moment(unsortedCards[cardId].timestamp).isAfter(twelveHoursAgo)) {
           recentCards.unshift(unsortedCards[cardId]);
         } else {
           randomlySortedCards.push(unsortedCards[cardId]);
