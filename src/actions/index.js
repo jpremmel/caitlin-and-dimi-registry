@@ -23,29 +23,14 @@ export const updateCheckbox = (event, gift) => ({
 });
 
 export const submitGiftForm = ({ firestore }, gift) => {
-  Object.keys(gift.funds).map(fund => {
-    if (!gift.funds[fund].checkbox || !gift.funds[fund].amount) {
-      //delete the fund and all its subfields from the gift
-      delete gift.funds[fund];
-    } else {
-      delete gift.funds[fund].checkbox;
-      delete gift.funds[fund].style;
-      delete gift.funds[fund].label;
-    }
-  });
   const timestampedGift = {
     ...gift,
     timestamp: new Date().toUTCString()
   }
-  console.log('Adding gift to firestore: ', timestampedGift);
-
   return (dispatch, getState) => {
-
     const fundTotals = getState().firestore.data.totals;
 
-    //Promise.all([promise1, promise2, promise3]); --> bundles lots of promises into one big one. Do I want to use this?
-
-    if (timestampedGift.funds.honeymoon) {
+    if (timestampedGift.funds.honeymoon.amount) {
       const newHoneyMoonTotal = fundTotals.funds.honeymoon + parseFloat(timestampedGift.funds.honeymoon.amount);
       firestore
         .collection('totals')
@@ -59,7 +44,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
         })
     }
 
-    if (timestampedGift.funds.loan) {
+    if (timestampedGift.funds.loan.amount) {
       const newLoansTotal = fundTotals.funds.loans + parseFloat(timestampedGift.funds.loan.amount);
       firestore
       .collection('totals')
@@ -73,7 +58,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
       })
     }
 
-    if (timestampedGift.funds.home) {
+    if (timestampedGift.funds.home.amount) {
       const newHomeTotal = fundTotals.funds.home + parseFloat(timestampedGift.funds.home.amount);
       firestore
       .collection('totals')
@@ -87,7 +72,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
       })
     }
 
-    if (timestampedGift.funds.therapy) {
+    if (timestampedGift.funds.therapy.amount) {
       const newTherapyTotal = fundTotals.funds.therapy + parseFloat(timestampedGift.funds.therapy.amount);
       firestore
       .collection('totals')
@@ -101,17 +86,61 @@ export const submitGiftForm = ({ firestore }, gift) => {
       })
     }
 
-    firestore
-      .collection('gifts')
-      .add(timestampedGift)
-      .then(() => {
-        console.log('Added gift to firestore.');
-        dispatch({ type: 'RESET_FORM' });
-      })
-      .catch(err => {
-        console.log('Error: ', err);
+    if (timestampedGift.funds.honeymoon.amount || timestampedGift.funds.loan.amount || timestampedGift.funds.home.amount || timestampedGift.funds.therapy.amount) {
+      Object.keys(timestampedGift.funds).map(fund => {
+        if (!timestampedGift.funds[fund].checkbox || !timestampedGift.funds[fund].amount) {
+          //delete the fund and all its subfields from the timestampedGift
+          delete timestampedGift.funds[fund];
+        } else {
+          delete timestampedGift.funds[fund].checkbox;
+          delete timestampedGift.funds[fund].style;
+          delete timestampedGift.funds[fund].label;
+        }
       });
-
-    dispatch({ type: 'SHOW_MODAL' });
+      firestore
+        .collection('gifts')
+        .add(timestampedGift)
+        .then(() => {
+          console.log('Added gift to firestore.');
+          sendEmail(timestampedGift);
+          dispatch({ type: 'RESET_FORM' });
+        })
+        .catch(err => {
+          console.log('Error: ', err);
+        });
+      dispatch({ type: 'SHOW_MODAL' });
+    }
   };
+};
+
+export const sendEmail = (gift) => {
+  let name, note, honeymoon, loans, home, therapy;
+  (gift.name)
+    ? name = `<p>Name: ${gift.name}</p>`
+    : name = '';
+  (gift.note)
+    ? note = `<p>Note: ${gift.note}</p>`
+    : note = '';
+  (gift && gift.funds && gift.funds.honeymoon && gift.funds.honeymoon.amount)
+    ? honeymoon = `<p>Honeymoon: $${gift.funds.honeymoon.amount}</p>`
+    : honeymoon = '';
+  (gift && gift.funds && gift.funds.loan && gift.funds.loan.amount)
+    ? loans = `<p>Student Loans: $${gift.funds.loan.amount}</p>`
+    : loans = '';
+  (gift && gift.funds && gift.funds.home && gift.funds.home.amount)
+    ? home = `<p>Our First Home: $${gift.funds.home.amount}</p>`
+    : home = '';
+  (gift && gift.funds && gift.funds.therapy && gift.funds.therapy.amount)
+    ? therapy = `<p>Therapy for Our Future Kids: $${gift.funds.therapy.amount}</p>`
+    : therapy = '';
+  const templateParams = {
+    html: `<h3>A new gift has been added to Caitlin & Dimi's Wedding Registry!</h3><p>Public on website: ${gift.public}</p>${name}${note}${honeymoon}${loans}${home}${therapy}`
+  };
+
+  emailjs.send('default_service', process.env.EMAIL_TEMPLATE_ID, templateParams, process.env.USER_ID)
+    .then((response) => {
+      console.log('Success!', response.status, response.text);
+    }, (error) => {
+      console.log('Failed:', error);
+    });
 };
