@@ -27,7 +27,7 @@ export const LoanBadge = () => {
 };
 
 export const HomeBadge = () => {
-  return <Badge color='#2fb6b6 ' caption='Our First Home' />;
+  return <Badge color='#2fb6b6' caption='Our First Home' />;
 };
 
 export const TherapyBadge = () => {
