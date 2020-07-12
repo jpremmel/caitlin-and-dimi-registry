@@ -1,3 +1,5 @@
+import emailjs from 'emailjs-com';
+
 export const updateFundCheckbox = (event, gift) => ({
   type: 'UPDATE_FUND_CHECKBOX',
   event,

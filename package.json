@@ -20,6 +20,7 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-labels": "^1.1.0",
     "css-loader": "^3.5.2",
+    "emailjs-com": "^2.4.1",
     "firebase": "^7.14.0",
     "isomorphic-fetch": "^2.2.1",
     "materialize-css": "1.0.0-rc.2",
@@ -51,6 +52,6 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.0"
   }
 }
