@@ -1,6 +1,6 @@
 # _Caitlin & Dimitar's Wedding Registry_
 
-#### _A personalized registry website created by the sister of the bride, 23 April 2020_
+#### _A personalized registry website created by the sister of the bride, 12 July 2020_
 
 #### By _**Jacqueline Remmel**_
 
@@ -21,10 +21,9 @@ Instead of a typical registry at a store, the bride and groom are giving their f
 * JavaScript
 * Chart.js
 * Materialize CSS
+* EmailJS
 * React
 * Redux
-* Thunk
-* React Router
 * Firebase/Cloud Firestore
 * HTML
 * Node.js
