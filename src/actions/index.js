@@ -118,25 +118,31 @@ export const submitGiftForm = ({ firestore }, gift) => {
 export const sendEmail = (gift) => {
   let name, note, honeymoon, loans, home, therapy;
   (gift.name)
-    ? name = `<p>Name: ${gift.name}</p>`
+    ? name = `Name: ${gift.name}`
     : name = '';
   (gift.note)
-    ? note = `<p>Note: ${gift.note}</p>`
+    ? note = `Note: ${gift.note}`
     : note = '';
   (gift && gift.funds && gift.funds.honeymoon && gift.funds.honeymoon.amount)
-    ? honeymoon = `<p>Honeymoon: $${gift.funds.honeymoon.amount}</p>`
+    ? honeymoon = `Honeymoon: $${gift.funds.honeymoon.amount}`
     : honeymoon = '';
   (gift && gift.funds && gift.funds.loan && gift.funds.loan.amount)
-    ? loans = `<p>Student Loans: $${gift.funds.loan.amount}</p>`
+    ? loans = `Student Loans: $${gift.funds.loan.amount}`
     : loans = '';
   (gift && gift.funds && gift.funds.home && gift.funds.home.amount)
-    ? home = `<p>Our First Home: $${gift.funds.home.amount}</p>`
+    ? home = `Our First Home: $${gift.funds.home.amount}`
     : home = '';
   (gift && gift.funds && gift.funds.therapy && gift.funds.therapy.amount)
-    ? therapy = `<p>Therapy for Our Future Kids: $${gift.funds.therapy.amount}</p>`
+    ? therapy = `Therapy for Our Future Kids: $${gift.funds.therapy.amount}`
     : therapy = '';
   const templateParams = {
-    html: `<h3>A new gift has been added to Caitlin & Dimi's Wedding Registry!</h3><p>Public on website: ${gift.public}</p>${name}${note}${honeymoon}${loans}${home}${therapy}`
+    public: `${gift.public}`,
+    name: `${name}`,
+    note: `${note}`,
+    honeymoon: `${honeymoon}`,
+    loans: `${loans}`,
+    home: `${home}`,
+    therapy: `${therapy}`
   };
 
   emailjs.send('default_service', process.env.EMAIL_TEMPLATE_ID, templateParams, process.env.USER_ID)
