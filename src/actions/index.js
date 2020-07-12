@@ -99,17 +99,34 @@ export const submitGiftForm = ({ firestore }, gift) => {
           delete timestampedGift.funds[fund].label;
         }
       });
-      firestore
-        .collection('gifts')
-        .add(timestampedGift)
-        .then(() => {
-          console.log('Added gift to firestore.');
-          sendEmail(timestampedGift);
-          dispatch({ type: 'RESET_FORM' });
-        })
-        .catch(err => {
-          console.log('Error: ', err);
-        });
+
+      timestampedGift.public 
+        ? (
+          firestore
+          .collection('gifts')
+          .add(timestampedGift)
+          .then(() => {
+            console.log('Public gift added to firestore.');
+            sendEmail(timestampedGift);
+            dispatch({ type: 'RESET_FORM' });
+          })
+          .catch(err => {
+            console.log('Error: ', err);
+          })
+        ) : (
+          firestore
+          .collection('gifts-private')
+          .add(timestampedGift)
+          .then(() => {
+            console.log('Private gift added to firestore.');
+            sendEmail(timestampedGift);
+            dispatch({ type: 'RESET_FORM' });
+          })
+          .catch(err => {
+            console.log('Error: ', err);
+          })
+        );
+
       dispatch({ type: 'SHOW_MODAL' });
     }
   };
