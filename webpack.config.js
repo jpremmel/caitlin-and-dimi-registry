@@ -88,7 +88,7 @@ module.exports = {
       appMountId: 'react-app-root',
       title: 'Caitlin & Dimitar: Wedding Registry',
       filename: resolve(__dirname, 'build', 'index.html'),
-      //favicon: './src/favicon.ico'
+      favicon: './src/images/favicon.ico'
     })
   ]
 };

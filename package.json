@@ -11,7 +11,12 @@
   },
   "eslintIgnore": [
     "CoverPhoto.jpg",
-    "JoyLogo.png"
+    "favicon.ico",
+    "home.jpg",
+    "honeymoon.jpg",
+    "JoyLogo.png",
+    "loan.jpg",
+    "therapy.jpg"
   ],
   "keywords": [],
   "author": "",
