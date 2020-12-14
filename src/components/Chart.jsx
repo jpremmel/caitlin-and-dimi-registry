@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { Doughnut } from 'react-chartjs-2';
 import 'chartjs-plugin-labels';
 
-const Chart = (props) => {
+const Chart = () => {
 
   useFirestoreConnect('totals');
   const fundTotals = useSelector(state => state.firestore.data['totals']);
@@ -39,7 +39,7 @@ const Chart = (props) => {
                 label: (tooltipItem, data) => {
                   const label = data.labels[tooltipItem['index']];
                   const dataset = data['datasets'][0];
-                  const percent = Math.round((dataset['data'][tooltipItem['index']] / dataset['_meta'][0]['total']) * 100)
+                  const percent = Math.round((dataset['data'][tooltipItem['index']] / dataset['_meta'][0]['total']) * 100);
                   return `${label}: ${percent}%`;
                 }
               }

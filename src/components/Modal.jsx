@@ -17,16 +17,21 @@ const Modal = ({ showModal, dispatch }) => {
       <div className='modal-body'>
         <p>Thank you SO much for contributing to our wedding registry! Your gift information has been added to the fund tracking system. Here are your options for sending your gift to the bride & groom:</p>
         <p>
-          Send via <a href='https://venmo.com/' target='_blank' rel='noopener noreferrer'>Venmo</a>
+          PayPal (including major credit cards): <a href='https://www.paypal.com/paypalme/marriageisexpensive' target='_blank' rel='noopener noreferrer'>paypal.me/marriageisexpensive</a>
         </p>
         <p>
-          Send via <a href='https://www.paypal.com/us/home' target='_blank' rel='noopener noreferrer'>PayPal</a>
+          Venmo: <a href='https://account.venmo.com/u/Dimitar-Georgiev' target='_blank' rel='noopener noreferrer'>@Dimitar-Georgiev</a>
         </p>
-        <p>Mail a check</p>
+        <div>
+          <p style={{ marginBottom: '0' }}>Mail a check:</p>
+          <p style={{ marginTop: '0', marginBottom: '0' }}>3033 Wilson Blvd, Ste. E</p>
+          <p style={{ marginTop: '0', marginBottom: '0' }}>Box 123</p>
+          <p style={{ marginTop: '0' }}>Arlington, VA 22201</p>
+        </div>
         <button 
           style={btnStyle} 
           className='btn waves-effect waves-light'
-          onClick={() => { dispatch({ type: 'HIDE_MODAL' }) }} >
+          onClick={() => { dispatch({ type: 'HIDE_MODAL' }); }} >
           <i className='large material-icons left'>
             {/* trending_up */} close
           </i>

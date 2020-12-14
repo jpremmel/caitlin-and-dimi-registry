@@ -10,7 +10,7 @@ const NoteCard = ({ color, gift }) => {
   let therapyBadge;
 
   if (gift && gift.name)
-    signature = <span>- {gift.name}</span>
+    signature = <span>- {gift.name}</span>;
 
   if (gift && gift.funds && gift.funds.honeymoon)
     honeymoonBadge = <HoneymoonBadge />;

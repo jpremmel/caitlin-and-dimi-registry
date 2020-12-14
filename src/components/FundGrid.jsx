@@ -11,13 +11,13 @@ const FundGrid = () => {
       <div className='row'>
         <FundCard
           title='Honeymoon'
-          content='Something funny about how honeymoons are expensive'
+          content="Because he'll need some rest, relaxation, and several drinks to gear up for this marriage"
           photo={HoneymoonPhoto}
           float='right'
           color='#ffe6b3' />
         <FundCard
           title='Student Loan Debt'
-          content='Something dramatic about crushing student loan debt'
+          content='She will be busy saving the world, so he is stuck paying the debt for both'
           photo={LoanPhoto}
           float='left'
           color='#e6d7f4' />
@@ -25,13 +25,13 @@ const FundGrid = () => {
       <div className='row'>
         <FundCard
           title='Our First Home'
-          content='Something cute about a house I guess'
+          content='Gotta love that DC housing market...'
           photo={HomePhoto}
           float='right'
           color='#a6e8e6' />
         <FundCard
           title='Therapy for Our Future Kids'
-          content='Something witty about how these kids are screwed'
+          content='(and maybe for Dimi)'
           photo={TherapyPhoto}
           float='left'
           color='#904d82' />

@@ -19,7 +19,7 @@ export const Badge = ({ color, caption }) => {
 };
 
 export const HoneymoonBadge = () => {
-  return <Badge color='#ffbb33' caption='Honeymoon' />
+  return <Badge color='#ffbb33' caption='Honeymoon' />;
 };
 
 export const LoanBadge = () => {

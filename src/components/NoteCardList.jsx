@@ -16,7 +16,7 @@ const NoteCardList = ({ giftList }) => {
       currentColor = 0;
     }
     return currentColor;
-  }
+  };
 
   const sortCards = (unsortedCards) => {
     const recentCards = [];

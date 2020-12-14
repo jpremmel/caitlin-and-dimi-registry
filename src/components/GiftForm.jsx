@@ -72,7 +72,7 @@ const GiftForm = ({ gift, dispatch }) => {
                     type='checkbox'
                     className='filled-in'
                     name={fund}
-                    onChange={(event) => {dispatch(updateFundCheckbox(event, gift))}}
+                    onChange={(event) => {dispatch(updateFundCheckbox(event, gift));}}
                     checked={gift.funds[fund].checkbox}
                   />
                   <span style={checkboxMargin}>{gift.funds[fund].label}</span>
@@ -85,7 +85,7 @@ const GiftForm = ({ gift, dispatch }) => {
                     placeholder=' Amount' 
                     style={{width: '90%'}}
                     name={fund}
-                    onChange={(event) => {dispatch(updateFundAmountInput(event, gift))}}
+                    onChange={(event) => {dispatch(updateFundAmountInput(event, gift));}}
                     value={gift.funds[fund].amount}
                     required={gift.funds[fund].checkbox}
                   />
@@ -102,7 +102,7 @@ const GiftForm = ({ gift, dispatch }) => {
             type='text' 
             style={textInputStyle}
             placeholder='Your Name' 
-            onChange={(event) => {dispatch(updateTextInput(event, gift))}}
+            onChange={(event) => {dispatch(updateTextInput(event, gift));}}
             value={gift.name}
             required={gift.public}
           />
@@ -115,7 +115,7 @@ const GiftForm = ({ gift, dispatch }) => {
             style={wideInputStyle}
             className='materialize-textarea'
             placeholder='Include a note to the happy couple'
-            onChange={(event) => {dispatch(updateTextInput(event, gift))}}
+            onChange={(event) => {dispatch(updateTextInput(event, gift));}}
             value={gift.note}
             required={gift.public}
           />
@@ -129,7 +129,7 @@ const GiftForm = ({ gift, dispatch }) => {
                 type='checkbox' 
                 className='filled-in' 
                 id='public'
-                onChange={(event) => {dispatch(updateCheckbox(event, gift))}}
+                onChange={(event) => {dispatch(updateCheckbox(event, gift));}}
                 checked={gift.public}
               />
               <span className='checkboxLabel'>
@@ -142,9 +142,9 @@ const GiftForm = ({ gift, dispatch }) => {
         <button 
           style={btnStyle} 
           className='btn waves-effect waves-light'>
-            <i className="material-icons left">
-              card_giftcard
-            </i>
+          <i className="material-icons left">
+            card_giftcard
+          </i>
           Add My Gift
         </button>
       </form>
