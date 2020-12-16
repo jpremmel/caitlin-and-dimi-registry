@@ -33,7 +33,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
     const fundTotals = getState().firestore.data.totals;
 
     if (timestampedGift.funds.honeymoon.amount) {
-      const newHoneyMoonTotal = fundTotals.funds.honeymoon + parseFloat(timestampedGift.funds.honeymoon.amount);
+      const newHoneyMoonTotal = fundTotals.funds.honeymoon + Math.abs(parseFloat(timestampedGift.funds.honeymoon.amount));
       firestore
         .collection('totals')
         .doc('funds')
@@ -47,7 +47,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
     }
 
     if (timestampedGift.funds.loan.amount) {
-      const newLoansTotal = fundTotals.funds.loans + parseFloat(timestampedGift.funds.loan.amount);
+      const newLoansTotal = fundTotals.funds.loans + Math.abs(parseFloat(timestampedGift.funds.loan.amount));
       firestore
       .collection('totals')
       .doc('funds')
@@ -61,7 +61,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
     }
 
     if (timestampedGift.funds.home.amount) {
-      const newHomeTotal = fundTotals.funds.home + parseFloat(timestampedGift.funds.home.amount);
+      const newHomeTotal = fundTotals.funds.home + Math.abs(parseFloat(timestampedGift.funds.home.amount));
       firestore
       .collection('totals')
       .doc('funds')
@@ -75,7 +75,7 @@ export const submitGiftForm = ({ firestore }, gift) => {
     }
 
     if (timestampedGift.funds.therapy.amount) {
-      const newTherapyTotal = fundTotals.funds.therapy + parseFloat(timestampedGift.funds.therapy.amount);
+      const newTherapyTotal = fundTotals.funds.therapy + Math.abs(parseFloat(timestampedGift.funds.therapy.amount));
       firestore
       .collection('totals')
       .doc('funds')
@@ -100,32 +100,29 @@ export const submitGiftForm = ({ firestore }, gift) => {
         }
       });
 
-      timestampedGift.public 
-        ? (
-          firestore
-          .collection('gifts')
-          .add(timestampedGift)
-          .then(() => {
-            console.log('Public gift added to firestore.');
-            sendEmail(timestampedGift);
-            dispatch({ type: 'RESET_FORM' });
-          })
-          .catch(err => {
-            console.log('Error: ', err);
-          })
-        ) : (
-          firestore
-          .collection('gifts-private')
-          .add(timestampedGift)
-          .then(() => {
-            console.log('Private gift added to firestore.');
-            sendEmail(timestampedGift);
-            dispatch({ type: 'RESET_FORM' });
-          })
-          .catch(err => {
-            console.log('Error: ', err);
-          })
-        );
+      if (timestampedGift.public) {
+        firestore
+        .collection('gifts')
+        .add(timestampedGift)
+        .then(() => {
+          console.log('Public gift added to firestore.');
+          sendEmail(timestampedGift);
+          dispatch({ type: 'RESET_FORM' });
+        }).catch(err => {
+          console.log('Error: ', err);
+        });
+      } else {
+        firestore
+        .collection('gifts-private')
+        .add(timestampedGift)
+        .then(() => {
+          console.log('Private gift added to firestore.');
+          sendEmail(timestampedGift);
+          dispatch({ type: 'RESET_FORM' });
+        }).catch(err => {
+          console.log('Error: ', err);
+        });
+      }
 
       dispatch({ type: 'SHOW_MODAL' });
     }
