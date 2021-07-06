@@ -36,7 +36,7 @@ const App = () => {
         </div>
         <PhotoOverlay />
       </div>
-      <div style={{ marginBottom: '40px'}}>
+      <div>
         <Navbar />
         <div id='registry'>
           <PageHeader headerText='Welcome to our wedding registry!' />
@@ -46,12 +46,31 @@ const App = () => {
           <FundGrid />
           <PageHeader headerText="Wedding Registry Funds: Current Status" />
           <Chart />
+          <footer class="page-footer" style={{ 
+            backgroundColor: '#803370', 
+            textAlign: 'center', 
+            paddingTop: '0',
+            marginTop: '40px'
+          }}>
+            <div class="footer-copyright">
+              <div class="container">
+                <a 
+                  id="brittany-link"
+                  href='https://brittanyformaryland.com' 
+                  target='_blank' 
+                  rel='noopener noreferrer' 
+                  style={{ color: '#fff'}} >
+                  Check out the next campaign Caitlin is working on!
+                </a>
+              </div>
+            </div>
+          </footer>
         </div>
-        <div id='form'>
+        <div id='form' style={{ marginBottom: '40px' }}>
           <PageHeader headerText='Add a Gift' />
           <GiftForm />
         </div>
-        <div id='notes'>
+        <div id='notes' style={{ marginBottom: '40px' }}>
           <PageHeader headerText='Notes from Loved Ones' />
           <NoteCardList />
         </div>

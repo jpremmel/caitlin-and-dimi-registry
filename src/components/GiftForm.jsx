@@ -94,7 +94,8 @@ const GiftForm = ({ gift, dispatch }) => {
             </div>
           );
         })}
-
+        
+        <br/>
         {/* NAME */}
         <div className='input-field'>
           <input 
