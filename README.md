@@ -27,4 +27,4 @@ Instead of a typical registry at a store, the bride and groom are giving their f
 
 *Open-source*
 
-Copyright (c) 2020 **_Jacqueline Remmel_**
+Copyright (c) 2021 **_Jacqueline Remmel_**
